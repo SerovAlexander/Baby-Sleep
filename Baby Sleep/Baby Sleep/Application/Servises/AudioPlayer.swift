@@ -12,13 +12,13 @@ import AVFoundation
 protocol AudioPlayerProtocol {
     func play(audio: String, name: String)
     func pause()
-    
+    func changeVolume(volume: Float)
 }
 
 class AudioPlayer: AudioPlayerProtocol {
     
     private let cashingService = CashingService()
-    var player: AVAudioPlayer?
+    private var player: AVAudioPlayer?
 
     func play(audio: String, name: String) {
         self.cashingService.cashingAudio(shortLink: audio, fileName: name, comletion: { [weak self] result in
@@ -44,5 +44,9 @@ class AudioPlayer: AudioPlayerProtocol {
 
     func pause() {
         player?.pause()
+    }
+
+    func changeVolume(volume: Float) {
+        player?.volume = volume
     }
 }

@@ -19,7 +19,9 @@ class StartViewController: UIViewController {
     private let network = NetworkService()
 
     // MARK: - UI
+
     let startButton = UIButton()
+
     // View for animation with Lottie
     let backgroundView = AnimationView()
 
@@ -50,7 +52,7 @@ class StartViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(50)
         }
     }
-    
+
     private func configureBackgroundView() {
         self.view.addSubview(backgroundView)
         backgroundView.contentMode = .scaleAspectFill
@@ -68,8 +70,12 @@ class StartViewController: UIViewController {
     // MARK: - Private Methods
 
     @objc private func startButtonAction() {
-        let destinationVC = ControllerBuilder.createMainViewController()
-        destinationVC.modalPresentationStyle = .fullScreen
-        self.show(destinationVC, sender: nil)
+//        let destinationVC = ControllerBuilder.createMainViewController()
+//        destinationVC.modalPresentationStyle = .fullScreen
+//        self.show(destinationVC, sender: nil)
+        
+        let vc = TimerViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        self.show(vc, sender: nil)
     }
 }

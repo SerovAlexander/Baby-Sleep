@@ -25,10 +25,11 @@ protocol MainVCPresenterProtocol {
     func getSound()
     func play(audio: String, name: String)
     func pause()
+    func changeVolume(volume: Float)
 }
 
 class MainVCPresenter: MainVCPresenterProtocol {
-    
+
     weak var view: MainViewControllerProtocol?
     private let networkService: NetworkService
     private let audioPlayer: AudioPlayerProtocol
@@ -70,11 +71,16 @@ class MainVCPresenter: MainVCPresenterProtocol {
     }
 
     func play(audio: String, name: String) {
+        print(audio, name)
         audioPlayer.play(audio: audio, name: name)
     }
 
     func pause() {
         audioPlayer.pause()
+    }
+
+    func changeVolume(volume: Float) {
+        audioPlayer.changeVolume(volume: volume)
     }
 
     private struct Inner {

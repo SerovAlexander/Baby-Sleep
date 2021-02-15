@@ -15,6 +15,9 @@
 		0496B48E24C1D87E00677EAA /* Montserra_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0496B48D24C1D87E00677EAA /* Montserra_Regular.ttf */; };
 		0496B49124C1EFE000677EAA /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496B49024C1EFE000677EAA /* MainViewCell.swift */; };
 		04DAF59F24E5B0DD001E9C48 /* CachingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAF59E24E5B0DD001E9C48 /* CachingService.swift */; };
+		04E84EC7258A1EA100A7CECA /* ChoiseTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E84EC6258A1EA100A7CECA /* ChoiseTimerView.swift */; };
+		04E84EE1258A204500A7CECA /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E84EE0258A204500A7CECA /* TimerView.swift */; };
+		04E9A6DE25DAFF9E0090C4D2 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A6DD25DAFF9D0090C4D2 /* TimerViewController.swift */; };
 		04F5668024B88CA6002FB386 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5667F24B88CA6002FB386 /* AppDelegate.swift */; };
 		04F5668224B88CA6002FB386 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5668124B88CA6002FB386 /* SceneDelegate.swift */; };
 		04F5668424B88CA6002FB386 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5668324B88CA6002FB386 /* StartViewController.swift */; };
@@ -38,6 +41,9 @@
 		0496B48D24C1D87E00677EAA /* Montserra_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Montserra_Regular.ttf; sourceTree = "<group>"; };
 		0496B49024C1EFE000677EAA /* MainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
 		04DAF59E24E5B0DD001E9C48 /* CachingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingService.swift; sourceTree = "<group>"; };
+		04E84EC6258A1EA100A7CECA /* ChoiseTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiseTimerView.swift; sourceTree = "<group>"; };
+		04E84EE0258A204500A7CECA /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		04E9A6DD25DAFF9D0090C4D2 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		04F5667C24B88CA6002FB386 /* Baby Sleep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Baby Sleep.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F5667F24B88CA6002FB386 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04F5668124B88CA6002FB386 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +107,24 @@
 				0496B49024C1EFE000677EAA /* MainViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		04E84EDF258A1F6600A7CECA /* CustomUIView */ = {
+			isa = PBXGroup;
+			children = (
+				04E84EE0258A204500A7CECA /* TimerView.swift */,
+				04E84EC6258A1EA100A7CECA /* ChoiseTimerView.swift */,
+			);
+			path = CustomUIView;
+			sourceTree = "<group>";
+		};
+		04E9A6DB25DAFF600090C4D2 /* TimerModule */ = {
+			isa = PBXGroup;
+			children = (
+				04E84EDF258A1F6600A7CECA /* CustomUIView */,
+				04E9A6DD25DAFF9D0090C4D2 /* TimerViewController.swift */,
+			);
+			path = TimerModule;
 			sourceTree = "<group>";
 		};
 		04F5667324B88CA6002FB386 = {
@@ -183,6 +207,7 @@
 		04F59E652575812300A35094 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				04E9A6DB25DAFF600090C4D2 /* TimerModule */,
 				04F59E8925763E0E00A35094 /* ControllerBuilder.swift */,
 				04F59E67257581C000A35094 /* StarModule */,
 				04F59E6A2575821F00A35094 /* MainModule */,
@@ -394,11 +419,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E84EE1258A204500A7CECA /* TimerView.swift in Sources */,
 				04F5668424B88CA6002FB386 /* StartViewController.swift in Sources */,
 				045C94F22576C19300A86876 /* HapticFeedback.swift in Sources */,
 				0492468224DAC48D00E5273E /* NetworkService.swift in Sources */,
+				04E9A6DE25DAFF9E0090C4D2 /* TimerViewController.swift in Sources */,
 				04F59E8F257642D700A35094 /* MainViewControllerPresenter.swift in Sources */,
 				04F5668024B88CA6002FB386 /* AppDelegate.swift in Sources */,
+				04E84EC7258A1EA100A7CECA /* ChoiseTimerView.swift in Sources */,
 				04F566A024BB0FD6002FB386 /* MainViewController.swift in Sources */,
 				04F5668224B88CA6002FB386 /* SceneDelegate.swift in Sources */,
 				04F59E822576366E00A35094 /* UIColorExtension.swift in Sources */,

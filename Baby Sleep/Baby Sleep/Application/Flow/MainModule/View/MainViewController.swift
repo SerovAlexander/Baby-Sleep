@@ -28,19 +28,19 @@ class MainViewController: UIViewController {
     private let cashingService = CashingService()
     
     // MARK: - UI
-    let topImage = UIImageView()
-    let topTriangle = UIImageView()
-    let natureLabel = UIButton()
-    let natureDot = UIImageView()
-    let noiseDot = UIImageView()
-    let noiseLable = UIButton()
-    let bottomImage = UIImageView()
-    let bottomTriangle = UIImageView()
-    let stopPlayButton = UIButton()
-    let volumeSlider = UISlider()
-    let loudVolumeImage = UIImageView()
-    let quiteVolumeImage = UIImageView()
-    let trackSlider = UISlider()
+    private let topImage = UIImageView()
+    private let topTriangle = UIImageView()
+    private let natureLabel = UIButton()
+    private let natureDot = UIImageView()
+    private let noiseDot = UIImageView()
+    private let noiseLable = UIButton()
+    private let bottomImage = UIImageView()
+    private let bottomTriangle = UIImageView()
+    private let stopPlayButton = UIButton()
+    private let volumeSlider = UISlider()
+    private let loudVolumeImage = UIImageView()
+    private let quiteVolumeImage = UIImageView()
+    private let trackSlider = UISlider()
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -210,6 +210,13 @@ class MainViewController: UIViewController {
         collectionView.backgroundColor = .background
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 70, left: 10, bottom: 10, right: 10)
+        layout.minimumLineSpacing = 50
+        layout.minimumInteritemSpacing = 10
+        collectionView.collectionViewLayout = layout
+        
 
         //Setup constreints
         collectionView.snp.makeConstraints { make in
@@ -272,7 +279,7 @@ class MainViewController: UIViewController {
 
     @objc private func changeVolume(_ slider: UISlider) {
         let value = volumeSlider.value
-        player?.volume = value
+        presenter.changeVolume(volume: value)
     }
 }
 
@@ -281,7 +288,7 @@ class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 176)
+        return CGSize(width: CGFloat(collectionView.frame.size.width / 3.5), height: 176)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -330,6 +337,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 }
 
 extension MainViewController: MainViewControllerProtocol {
+
     func succes() {
         collectionView.reloadData()
     }
