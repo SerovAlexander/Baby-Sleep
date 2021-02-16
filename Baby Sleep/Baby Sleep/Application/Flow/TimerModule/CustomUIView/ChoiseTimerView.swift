@@ -15,6 +15,7 @@ import UIKit
 
 class ChoiseTimerView: UIView {
     
+    private let conteinerView = UIView()
     private let fifteenView = TimerView(time: "15m")
     private let thirtyView = TimerView(time: "30m")
     private let fortyfiveView = TimerView(time: "45m")
@@ -29,6 +30,7 @@ class ChoiseTimerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configure()
+        configureConteinerView()
         configureRightStack()
         configureLeftStack()
         setupConstreint()
@@ -39,11 +41,12 @@ class ChoiseTimerView: UIView {
     }
     
     private func configure() {
-        self.backgroundColor = UIColor.background
-        addSubview(rightStackView)
-        addSubview(leftStackView)
-        addSubview(clearButton)
-    
+        self.backgroundColor = UIColor.background.withAlphaComponent(0.95)
+        addSubview(conteinerView)
+        conteinerView.addSubview(rightStackView)
+        conteinerView.addSubview(leftStackView)
+        conteinerView.addSubview(clearButton)
+        
         rightStackView.addArrangedSubview(thirtyView)
         rightStackView.addArrangedSubview(hourView)
         rightStackView.addArrangedSubview(infinityView)
@@ -53,7 +56,20 @@ class ChoiseTimerView: UIView {
         leftStackView.addArrangedSubview(twoHourView)
     }
     
+    private func configureConteinerView() {
+        conteinerView.backgroundColor = .none
+        conteinerView.layer.cornerRadius = 25
+        
+        conteinerView.snp.makeConstraints {
+            $0.width.equalTo(250)
+            $0.height.equalTo(250)
+            $0.trailing.equalToSuperview().inset(6)
+            $0.bottom.equalToSuperview().inset(136)
+        }
+    }
+    
     private func configureRightStack() {
+        
         rightStackView.axis = .vertical
         rightStackView.alignment = .center
         rightStackView.spacing = 24
@@ -66,6 +82,7 @@ class ChoiseTimerView: UIView {
         thirtyView.layer.cornerRadius = 15
         hourView.layer.cornerRadius = 15
         infinityView.layer.cornerRadius = 15
+        
         
         thirtyView.snp.makeConstraints { make in
             make.width.height.equalTo(50)
@@ -105,19 +122,21 @@ class ChoiseTimerView: UIView {
     }
     
     private func configureClearButton() {
-        clearButton.setImage(UIImage(named: "xmark.circle.fill"), for: .normal)
-        clearButton.backgroundColor = .red
-        clearButton.addTarget(self, action: #selector(animat), for: .touchUpInside)
+        guard let timer = UIImage(named: "timer") else { return }
+        
+        clearButton.setImage(timer, for: .normal)
+        clearButton.contentMode = .scaleAspectFit
     }
     
     private func setupConstreint() {
         rightStackView.snp.makeConstraints { make in
-            make.top.bottom.left.equalToSuperview().inset(24)
+            make.top.bottom.equalToSuperview().inset(24)
+            make.leading.equalTo(40)
         }
         
         leftStackView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview().inset(24)
-            make.left.equalTo(rightStackView.snp.right).offset(24)
+            make.leading.equalTo(rightStackView.snp.trailing).offset(24)
         }
         
         clearButton.snp.makeConstraints { make in

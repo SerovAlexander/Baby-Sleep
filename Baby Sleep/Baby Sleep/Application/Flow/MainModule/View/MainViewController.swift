@@ -40,7 +40,8 @@ class MainViewController: UIViewController {
     private let volumeSlider = UISlider()
     private let loudVolumeImage = UIImageView()
     private let quiteVolumeImage = UIImageView()
-    private let trackSlider = UISlider()
+    private let timerButton = UIButton()
+    private var timerCustomView = ChoiseTimerView()
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -63,13 +64,13 @@ class MainViewController: UIViewController {
         setupBottomRectangle()
         configureStopPlayButton()
         configureVolumeSlider()
-        configureTrackSlider()
+        configureTimerButton()
         configureCollectionView()
         configureTopTriangle()
         configureBottomTriangle()
         configureNatureLabel()
         configureNoiseLabel()
-        
+        configureTimerCustomView()
     }
     
     //MARK:- Configure UI
@@ -194,14 +195,18 @@ class MainViewController: UIViewController {
         }
     }
 
-    private func configureTrackSlider() {
-        self.view.addSubview(trackSlider)
-        trackSlider.tintColor = .white
-        //Setup constreints
-        trackSlider.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalTo(241)
-            make.bottom.equalTo(volumeSlider.snp.bottom).inset(66)
+    private func configureTimerButton() {
+        self.view.addSubview(timerButton)
+        guard let timer = UIImage(named: "timer") else { return }
+        
+        timerButton.setImage(timer, for: .normal)
+        timerButton.contentMode = .scaleAspectFit
+        timerButton.addTarget(self, action: #selector(showTimer), for: .touchUpInside)
+        
+        timerButton.snp.makeConstraints {
+            $0.bottom.equalTo(volumeSlider.snp.bottom).inset(50)
+            $0.trailing.equalToSuperview().inset(30)
+            $0.width.height.equalTo(28)
         }
     }
 
@@ -251,6 +256,14 @@ class MainViewController: UIViewController {
             make.width.height.equalTo(80)
         }
     }
+    
+    private func configureTimerCustomView() {
+        let screenSize: CGRect = UIScreen.main.bounds
+        timerCustomView = ChoiseTimerView(frame: screenSize)
+        self.view.addSubview(timerCustomView)
+        timerCustomView.isHidden = true
+        timerCustomView.alpha = 0
+    }
 
     //MARK:- Private Methods
 
@@ -280,6 +293,13 @@ class MainViewController: UIViewController {
     @objc private func changeVolume(_ slider: UISlider) {
         let value = volumeSlider.value
         presenter.changeVolume(volume: value)
+    }
+    
+    @objc private func showTimer() {
+        UIView.animate(withDuration: 0.3) {
+            self.timerCustomView.isHidden = false
+            self.timerCustomView.alpha = 1
+        }
     }
 }
 
