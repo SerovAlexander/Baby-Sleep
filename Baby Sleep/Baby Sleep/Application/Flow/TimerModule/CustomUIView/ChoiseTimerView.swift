@@ -12,6 +12,10 @@ import SnapKit
 import UIKit
 
 // ----------------------------------------------------------------------------
+protocol timerViewDelegate: AnyObject {
+    func timerButtonTapped()
+}
+
 
 class ChoiseTimerView: UIView {
     
@@ -24,8 +28,9 @@ class ChoiseTimerView: UIView {
     private let infinityView = TimerView(time: "∞")
     private let rightStackView = UIStackView()
     private let leftStackView = UIStackView()
-    private let clearButton = UIButton()
+    private let timerButton = UIButton()
     
+    weak var delegate: timerViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,18 +39,17 @@ class ChoiseTimerView: UIView {
         configureRightStack()
         configureLeftStack()
         setupConstreint()
-        configureClearButton()
+        configureTimerButton()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     private func configure() {
-        self.backgroundColor = UIColor.background.withAlphaComponent(0.95)
         addSubview(conteinerView)
         conteinerView.addSubview(rightStackView)
         conteinerView.addSubview(leftStackView)
-        conteinerView.addSubview(clearButton)
+        conteinerView.addSubview(timerButton)
         
         rightStackView.addArrangedSubview(thirtyView)
         rightStackView.addArrangedSubview(hourView)
@@ -57,14 +61,15 @@ class ChoiseTimerView: UIView {
     }
     
     private func configureConteinerView() {
-        conteinerView.backgroundColor = .none
+        conteinerView.backgroundColor = UIColor.background
         conteinerView.layer.cornerRadius = 25
         
         conteinerView.snp.makeConstraints {
-            $0.width.equalTo(250)
-            $0.height.equalTo(250)
-            $0.trailing.equalToSuperview().inset(6)
-            $0.bottom.equalToSuperview().inset(136)
+//            $0.width.equalTo(250)
+//            $0.height.equalTo(250)
+//            $0.trailing.equalToSuperview().inset(6)
+//            $0.bottom.equalToSuperview().inset(136)
+            $0.bottom.top.leading.trailing.equalToSuperview()
         }
     }
     
@@ -121,11 +126,12 @@ class ChoiseTimerView: UIView {
 
     }
     
-    private func configureClearButton() {
+    private func configureTimerButton() {
         guard let timer = UIImage(named: "timer") else { return }
         
-        clearButton.setImage(timer, for: .normal)
-        clearButton.contentMode = .scaleAspectFit
+        timerButton.setImage(timer, for: .normal)
+        timerButton.contentMode = .scaleAspectFit
+        timerButton.addTarget(self, action: #selector(timerButtonTapped), for: .touchUpInside)
     }
     
     private func setupConstreint() {
@@ -139,11 +145,15 @@ class ChoiseTimerView: UIView {
             make.leading.equalTo(rightStackView.snp.trailing).offset(24)
         }
         
-        clearButton.snp.makeConstraints { make in
+        timerButton.snp.makeConstraints { make in
             make.width.height.equalTo(28)
             make.bottom.equalToSuperview().inset(24)
             make.trailing.equalToSuperview().inset(24)
         }
+    }
+    
+    @objc private func timerButtonTapped() {
+        delegate?.timerButtonTapped()
     }
     
     @objc private func animat() {

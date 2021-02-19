@@ -41,7 +41,8 @@ class MainViewController: UIViewController {
     private let loudVolumeImage = UIImageView()
     private let quiteVolumeImage = UIImageView()
     private let timerButton = UIButton()
-    private var timerCustomView = ChoiseTimerView()
+    private lazy var timerCustomView = ChoiseTimerView()
+    private let visualEffectView = UIVisualEffectView()
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -70,10 +71,34 @@ class MainViewController: UIViewController {
         configureBottomTriangle()
         configureNatureLabel()
         configureNoiseLabel()
-        configureTimerCustomView()
+//        configureTimerCustomView()
+//        configureConteinerView()
+        convigureVisualEffectView()
     }
     
     //MARK:- Configure UI
+    
+    private func convigureVisualEffectView() {
+        let blureEffect = UIBlurEffect(style: .light)
+        visualEffectView.effect = blureEffect
+        
+        self.view.addSubview(visualEffectView)
+        visualEffectView.alpha = 0
+        
+        visualEffectView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    private func animateIn() {
+        timerCustomView.transform = CGAffineTransform(scaleX: 1.4 , y: 1.4)
+        timerCustomView.alpha = 0
+        UIView.animate(withDuration: 0.5) {
+            self.timerCustomView.transform = CGAffineTransform.identity
+            self.timerCustomView.alpha = 1
+            self.visualEffectView.alpha = 1
+        }
+    }
     
     private func configureTopRectangle() {
         guard let image = UIImage(named: "Rectangletop") else { return }
@@ -257,14 +282,26 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func configureTimerCustomView() {
-        let screenSize: CGRect = UIScreen.main.bounds
-        timerCustomView = ChoiseTimerView(frame: screenSize)
+//    private func configureTimerCustomView() {
+//        let screenSize: CGRect = UIScreen.main.bounds
+//        timerCustomView = ChoiseTimerView(frame: screenSize)
+//        self.view.addSubview(timerCustomView)
+//        timerCustomView.isHidden = true
+//        timerCustomView.alpha = 0
+//    }
+    
+    private func configureConteinerView() {
         self.view.addSubview(timerCustomView)
-        timerCustomView.isHidden = true
-        timerCustomView.alpha = 0
+        timerCustomView.layer.cornerRadius = 25
+        timerCustomView.delegate = self
+        timerCustomView.snp.makeConstraints {
+            $0.width.equalTo(250)
+            $0.height.equalTo(250)
+            $0.trailing.equalToSuperview().inset(6)
+            $0.bottom.equalToSuperview().inset(136)
+        }
     }
-
+    
     //MARK:- Private Methods
 
     @objc private func natureButtonAction() {
@@ -296,10 +333,10 @@ class MainViewController: UIViewController {
     }
     
     @objc private func showTimer() {
-        UIView.animate(withDuration: 0.3) {
-            self.timerCustomView.isHidden = false
-            self.timerCustomView.alpha = 1
-        }
+//        UIView.animate(withDuration: 0.3) {
+            self.configureConteinerView()
+            self.animateIn()
+//        }
     }
 }
 
@@ -364,5 +401,18 @@ extension MainViewController: MainViewControllerProtocol {
     
     func failure(error: Error) {
         print(error)
+    }
+}
+
+extension MainViewController: timerViewDelegate {
+    func timerButtonTapped() {
+        UIView.animate(withDuration: 0.4) {
+            self.visualEffectView.alpha = 0
+            self.timerCustomView.alpha = 0
+            self.timerCustomView.transform = CGAffineTransform(scaleX: 1.4 , y: 1.4)
+        } completion: { (_) in
+            self.timerCustomView.removeFromSuperview()
+        }
+
     }
 }
