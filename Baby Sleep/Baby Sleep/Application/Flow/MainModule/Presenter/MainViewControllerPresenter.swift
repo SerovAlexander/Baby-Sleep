@@ -23,7 +23,7 @@ protocol MainVCPresenterProtocol {
     var natureSounds: [SoundModel]? { get set }
     var noiseSounds: [SoundModel]? { get set }
     func getSound()
-    func play(audio: String, name: String)
+    func play(audio: String, name: String, time: Int)
     func pause()
     func changeVolume(volume: Float)
 }
@@ -70,9 +70,15 @@ class MainVCPresenter: MainVCPresenterProtocol {
         }
     }
 
-    func play(audio: String, name: String) {
-        print(audio, name)
+    func play(audio: String, name: String, time: Int) {
         audioPlayer.play(audio: audio, name: name)
+        if time != 1 {
+            let seconds = TimeInterval(time * 60)//DispatchTime(uptimeNanoseconds: UInt64(time * 60))
+            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
+                guard let self = self else { return }
+                self.audioPlayer.pause()
+            }
+        }
     }
 
     func pause() {

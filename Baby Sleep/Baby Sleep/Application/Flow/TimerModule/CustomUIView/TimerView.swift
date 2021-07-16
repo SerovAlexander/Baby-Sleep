@@ -13,17 +13,22 @@ import UIKit
 
 // ----------------------------------------------------------------------------
 
-class TimerView: UIView {
+class TimerView: UIButton {
 
     // MARK: - UI
     private let timeLabel = UILabel()
+    private var timeString: String
     
-    private var time: String
+    var time: Int
+    
+    // MARK: - Private Properties
+    private let generator = UINotificationFeedbackGenerator()
     
     // MARK: - Init
     
-     init(frame: CGRect, time: String) {
-        self.time = time
+    init(frame: CGRect, time: String, timer: Int) {
+        self.timeString = time
+        self.time = timer
         super.init(frame: frame)
         configure()
         setupConstreint()
@@ -33,24 +38,36 @@ class TimerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(time: String) {
+    convenience init(time: String, timer: Int) {
         let frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        self.init(frame: frame, time: time)
+        self.init(frame: frame, time: time, timer: timer)
     }
     
     private func configure() {
         timeLabel.textColor = .black
-        timeLabel.text = time
+        timeLabel.text = timeString
         timeLabel.font = .systemFont(ofSize: 15)
         timeLabel.textAlignment = .center
+        self.addTarget(self, action: #selector(touchDown), for: [.touchDown, .touchDragEnter])
+        self.addTarget(self, action: #selector(touchUp), for: [.touchCancel, .touchUpInside, .touchUpOutside, .touchDragExit])
     }
     
     private func setupConstreint() {
         addSubview(timeLabel)
         timeLabel.snp.makeConstraints { make in
-//            make.height.equalTo(18)
-//            make.width.equalTo(30)
             make.center.equalToSuperview()
         }
+    }
+    
+}
+// MARK: - Handlers
+extension TimerView {
+    @objc func touchDown() {
+        timeLabel.alpha = 0.6
+        generator.notificationOccurred(.success)
+    }
+    
+    @objc func touchUp() {
+        timeLabel.alpha = 1
     }
 }

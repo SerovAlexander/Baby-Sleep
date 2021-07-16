@@ -16,7 +16,7 @@ protocol AudioPlayerProtocol {
 }
 
 class AudioPlayer: AudioPlayerProtocol {
-    
+
     private let cashingService = CashingService()
     private var player: AVAudioPlayer?
 
@@ -31,8 +31,8 @@ class AudioPlayer: AudioPlayerProtocol {
                     try AVAudioSession.sharedInstance().setCategory(.playback)
                     try self.player = AVAudioPlayer(contentsOf: url)
                     guard let player = self.player else { return }
-                    player.numberOfLoops = 2
                     player.play()
+                    player.numberOfLoops = -1
                 } catch {
                     print("Play error \(error)")
                 }

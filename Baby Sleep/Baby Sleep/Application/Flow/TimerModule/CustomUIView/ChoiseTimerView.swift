@@ -14,23 +14,25 @@ import UIKit
 // ----------------------------------------------------------------------------
 protocol timerViewDelegate: AnyObject {
     func timerButtonTapped()
+    func timeButtonTapped(timer: Int)
 }
 
 
 class ChoiseTimerView: UIView {
     
     private let conteinerView = UIView()
-    private let fifteenView = TimerView(time: "15m")
-    private let thirtyView = TimerView(time: "30m")
-    private let fortyfiveView = TimerView(time: "45m")
-    private let hourView = TimerView(time: "1h")
-    private let twoHourView = TimerView(time: "2h")
-    private let infinityView = TimerView(time: "∞")
+    private let fifteenView = TimerView(time: "15m", timer: 15)
+    private let thirtyView = TimerView(time: "30m", timer: 30)
+    private let fortyfiveView = TimerView(time: "45m", timer: 45)
+    private let hourView = TimerView(time: "1h", timer: 60)
+    private let twoHourView = TimerView(time: "2h", timer: 120)
+    private let infinityView = TimerView(time: "∞", timer: 1)
     private let rightStackView = UIStackView()
     private let leftStackView = UIStackView()
     private let timerButton = UIButton()
     
     weak var delegate: timerViewDelegate?
+    private var choseTime = 15
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -40,6 +42,7 @@ class ChoiseTimerView: UIView {
         configureLeftStack()
         setupConstreint()
         configureTimerButton()
+        setButtonTag()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -65,10 +68,6 @@ class ChoiseTimerView: UIView {
         conteinerView.layer.cornerRadius = 25
         
         conteinerView.snp.makeConstraints {
-//            $0.width.equalTo(250)
-//            $0.height.equalTo(250)
-//            $0.trailing.equalToSuperview().inset(6)
-//            $0.bottom.equalToSuperview().inset(136)
             $0.bottom.top.leading.trailing.equalToSuperview()
         }
     }
@@ -123,7 +122,6 @@ class ChoiseTimerView: UIView {
         twoHourView.snp.makeConstraints { make in
             make.width.height.equalTo(50)
         }
-
     }
     
     private func configureTimerButton() {
@@ -152,15 +150,43 @@ class ChoiseTimerView: UIView {
         }
     }
     
+    private func setButtonTag() {
+        fifteenView.tag = 1
+        thirtyView.tag = 2
+        fortyfiveView.tag = 3
+        hourView.tag = 4
+        twoHourView.tag = 5
+        infinityView.tag = 6
+        
+        [fifteenView, thirtyView, fortyfiveView, hourView, twoHourView, infinityView].forEach {
+            $0.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
+        }
+    }
+    
+    
     @objc private func timerButtonTapped() {
         delegate?.timerButtonTapped()
     }
     
-    @objc private func animat() {
-        UIView.animate(withDuration: 1, animations: {
-            self.rightStackView.isHidden = true
-            self.leftStackView.isHidden = true
-        }, completion: nil)
+    @objc private func timeButtonTapped(sender: UIButton) {
+        var time = 15
+        switch sender.tag {
+        case 1:
+            time = 15
+        case 2:
+            time = 30
+        case 3:
+            time = 45
+        case 4:
+            time = 60
+        case 5:
+            time = 120
+        case 6:
+            time = 1
+        default:
+            time = 15
+        }
+        delegate?.timeButtonTapped(timer: time)
     }
 }
 

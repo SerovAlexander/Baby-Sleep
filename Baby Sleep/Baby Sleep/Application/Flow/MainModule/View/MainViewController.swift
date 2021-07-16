@@ -26,6 +26,7 @@ class MainViewController: UIViewController {
     private var player: AVAudioPlayer!
     private let storageRef = Storage.storage().reference()
     private let cashingService = CashingService()
+    private var timeOfPlay = 15
     
     // MARK: - UI
     private let topImage = UIImageView()
@@ -47,11 +48,11 @@ class MainViewController: UIViewController {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 30, left: 15, bottom: 30, right: 15)
         layout.minimumLineSpacing = 20
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(MainViewCell.self, forCellWithReuseIdentifier: identifier)
         cv.isUserInteractionEnabled = true
+        cv.showsVerticalScrollIndicator = false
         return cv
     }()
     
@@ -79,7 +80,7 @@ class MainViewController: UIViewController {
     //MARK:- Configure UI
     
     private func convigureVisualEffectView() {
-        let blureEffect = UIBlurEffect(style: .light)
+        let blureEffect = UIBlurEffect(style: .dark)
         visualEffectView.effect = blureEffect
         
         self.view.addSubview(visualEffectView)
@@ -281,15 +282,7 @@ class MainViewController: UIViewController {
             make.width.height.equalTo(80)
         }
     }
-    
-//    private func configureTimerCustomView() {
-//        let screenSize: CGRect = UIScreen.main.bounds
-//        timerCustomView = ChoiseTimerView(frame: screenSize)
-//        self.view.addSubview(timerCustomView)
-//        timerCustomView.isHidden = true
-//        timerCustomView.alpha = 0
-//    }
-    
+
     private func configureConteinerView() {
         self.view.addSubview(timerCustomView)
         timerCustomView.layer.cornerRadius = 25
@@ -301,7 +294,7 @@ class MainViewController: UIViewController {
             $0.bottom.equalToSuperview().inset(136)
         }
     }
-    
+
     //MARK:- Private Methods
 
     @objc private func natureButtonAction() {
@@ -333,10 +326,8 @@ class MainViewController: UIViewController {
     }
     
     @objc private func showTimer() {
-//        UIView.animate(withDuration: 0.3) {
             self.configureConteinerView()
             self.animateIn()
-//        }
     }
 }
 
@@ -345,7 +336,22 @@ class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: CGFloat(collectionView.frame.size.width / 3.5), height: 176)
+
+        if UIDevice.current.screenType == .iPhone_XSMax_11ProMax {
+            return CGSize(width: 100, height: 176)
+        } else {
+            return CGSize(width: 100, height: 166)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            return UIEdgeInsets(top: 30, left: 15, bottom: 0, right: 15)
+        } else if UIDevice.current.screenType == .iPhone_XSMax_11ProMax {
+            return UIEdgeInsets(top: 60, left: 34, bottom: 0, right: 34)
+        } else {
+            return UIEdgeInsets(top: 46, left: 34, bottom: 43, right: 34)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -375,11 +381,11 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         if let cell = collectionView.cellForItem(at: indexPath) as? MainViewCell {
             if noiseFlag == false {
                 guard let model = presenter.natureSounds?[indexPath.row] else { return }
-                presenter.play(audio: model.audioUrl, name: model.titleEn)
+                presenter.play(audio: model.audioUrl, name: model.titleEn, time: timeOfPlay)
                 cell.highlites(with: model)
             } else {
                 guard let model = presenter.noiseSounds?[indexPath.row] else { return }
-                presenter.play(audio: model.audioUrl, name: model.titleEn)
+                presenter.play(audio: model.audioUrl, name: model.titleEn, time: timeOfPlay)
                 cell.highlites(with: model)
             }
         }
@@ -405,6 +411,11 @@ extension MainViewController: MainViewControllerProtocol {
 }
 
 extension MainViewController: timerViewDelegate {
+    func timeButtonTapped(timer: Int) {
+        timeOfPlay = timer
+        timerButtonTapped()
+    }
+
     func timerButtonTapped() {
         UIView.animate(withDuration: 0.4) {
             self.visualEffectView.alpha = 0
@@ -413,6 +424,5 @@ extension MainViewController: timerViewDelegate {
         } completion: { (_) in
             self.timerCustomView.removeFromSuperview()
         }
-
     }
 }
