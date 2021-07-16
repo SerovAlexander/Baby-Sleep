@@ -46,7 +46,7 @@ class TimerView: UIButton {
     private func configure() {
         timeLabel.textColor = .black
         timeLabel.text = timeString
-        timeLabel.font = .systemFont(ofSize: 15)
+        timeLabel.font = UIFont(name: "MontserratAlternates-Regular", size: 15.0)
         timeLabel.textAlignment = .center
         self.addTarget(self, action: #selector(touchDown), for: [.touchDown, .touchDragEnter])
         self.addTarget(self, action: #selector(touchUp), for: [.touchCancel, .touchUpInside, .touchUpOutside, .touchDragExit])

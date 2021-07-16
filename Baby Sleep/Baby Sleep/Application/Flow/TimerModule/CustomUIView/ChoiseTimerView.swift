@@ -14,7 +14,7 @@ import UIKit
 // ----------------------------------------------------------------------------
 protocol timerViewDelegate: AnyObject {
     func timerButtonTapped()
-    func timeButtonTapped(timer: Int)
+    func timeButtonTapped(playTime: Int)
 }
 
 
@@ -169,24 +169,23 @@ class ChoiseTimerView: UIView {
     }
     
     @objc private func timeButtonTapped(sender: UIButton) {
-        var time = 15
+        var playTime = 15
         switch sender.tag {
         case 1:
-            time = 15
+            playTime = 15
         case 2:
-            time = 30
+            playTime = 30
         case 3:
-            time = 45
+            playTime = 45
         case 4:
-            time = 60
+            playTime = 60
         case 5:
-            time = 120
+            playTime = 120
         case 6:
-            time = 1
+            playTime = 1
         default:
-            time = 15
+            playTime = 15
         }
-        delegate?.timeButtonTapped(timer: time)
+        delegate?.timeButtonTapped(playTime: playTime)
     }
 }
-

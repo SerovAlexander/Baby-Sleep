@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
     private var player: AVAudioPlayer!
     private let storageRef = Storage.storage().reference()
     private let cashingService = CashingService()
-    private var timeOfPlay = 15
+    private var playTime = 15
     
     // MARK: - UI
     private let topImage = UIImageView()
@@ -44,6 +44,7 @@ class MainViewController: UIViewController {
     private let timerButton = UIButton()
     private lazy var timerCustomView = ChoiseTimerView()
     private let visualEffectView = UIVisualEffectView()
+    private let timerLabel = UILabel()
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -72,19 +73,21 @@ class MainViewController: UIViewController {
         configureBottomTriangle()
         configureNatureLabel()
         configureNoiseLabel()
-//        configureTimerCustomView()
-//        configureConteinerView()
+        configureTimeLabel()
         convigureVisualEffectView()
     }
     
     //MARK:- Configure UI
-    
     private func convigureVisualEffectView() {
         let blureEffect = UIBlurEffect(style: .dark)
         visualEffectView.effect = blureEffect
         
         self.view.addSubview(visualEffectView)
         visualEffectView.alpha = 0
+        
+        visualEffectView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(closeTimerView))
+        visualEffectView.addGestureRecognizer(tap)
         
         visualEffectView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
@@ -94,6 +97,7 @@ class MainViewController: UIViewController {
     private func animateIn() {
         timerCustomView.transform = CGAffineTransform(scaleX: 1.4 , y: 1.4)
         timerCustomView.alpha = 0
+        visualEffectView.isUserInteractionEnabled = true
         UIView.animate(withDuration: 0.5) {
             self.timerCustomView.transform = CGAffineTransform.identity
             self.timerCustomView.alpha = 1
@@ -110,7 +114,12 @@ class MainViewController: UIViewController {
         
         //Setup constreints
         topImage.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                make.top.equalToSuperview().offset(-68)
+            } else {
+                make.top.equalToSuperview()
+            }
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(148)
         }
     }
@@ -124,7 +133,12 @@ class MainViewController: UIViewController {
         
         //Setup constreints
         bottomImage.snp.makeConstraints { make in
-            make.bottom.leading.trailing.equalToSuperview()
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                make.bottom.equalToSuperview().offset(40)
+            } else {
+                make.bottom.equalToSuperview()
+            }
+            make.leading.trailing.equalToSuperview()
             make.height.equalTo(227)
         }
     }
@@ -142,7 +156,11 @@ class MainViewController: UIViewController {
         //Setup constreints
         natureLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(60)
-            make.top.equalToSuperview().offset(80)
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                make.top.equalToSuperview().offset(40)
+            } else {
+                make.top.equalToSuperview().offset(80)
+            }
             make.height.equalTo(24)
             make.width.equalTo(101)
         }
@@ -169,7 +187,11 @@ class MainViewController: UIViewController {
         //Setup constreints
         noiseLable.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(61)
-            make.top.equalToSuperview().offset(80)
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                make.top.equalToSuperview().offset(40)
+            } else {
+                make.top.equalToSuperview().offset(80)
+            }
             make.height.equalTo(24)
             make.width.equalTo(53)
         }
@@ -249,7 +271,7 @@ class MainViewController: UIViewController {
         collectionView.collectionViewLayout = layout
         
 
-        //Setup constreints
+        //Setup constraints
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(topImage.snp.bottom)
@@ -262,7 +284,7 @@ class MainViewController: UIViewController {
         topTriangle.image = image
         self.view.addSubview(topTriangle)
 
-        //Setup constreints
+        //Setup constraints
         topTriangle.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
             make.top.equalTo(topImage.snp.bottom)
@@ -275,7 +297,7 @@ class MainViewController: UIViewController {
         bottomTriangle.image = image
         self.view.addSubview(bottomTriangle)
 
-        //Setup constreints
+        //Setup constraints
         bottomTriangle.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.bottom.equalTo(bottomImage.snp.top)
@@ -287,11 +309,28 @@ class MainViewController: UIViewController {
         self.view.addSubview(timerCustomView)
         timerCustomView.layer.cornerRadius = 25
         timerCustomView.delegate = self
+        timerCustomView.isUserInteractionEnabled = true
+        
+        //Setup constraints
         timerCustomView.snp.makeConstraints {
             $0.width.equalTo(250)
             $0.height.equalTo(250)
             $0.trailing.equalToSuperview().inset(6)
             $0.bottom.equalToSuperview().inset(136)
+        }
+    }
+    
+    private func configureTimeLabel() {
+        view.addSubview(timerLabel)
+        timerLabel.font = UIFont(name: "MontserratAlternates-Regular", size: 25.0)
+        timerLabel.text = "15:00"
+        timerLabel.textAlignment = .center
+        
+        //Setup constraints
+        timerLabel.snp.makeConstraints {
+            $0.centerX.equalTo(stopPlayButton)
+            $0.centerY.equalTo(timerButton)
+            $0.width.equalTo(100)
         }
     }
 
@@ -328,6 +367,10 @@ class MainViewController: UIViewController {
     @objc private func showTimer() {
             self.configureConteinerView()
             self.animateIn()
+    }
+    
+    @objc private func closeTimerView(sender: UIView) {
+        timerButtonTapped()
     }
 }
 
@@ -381,11 +424,11 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         if let cell = collectionView.cellForItem(at: indexPath) as? MainViewCell {
             if noiseFlag == false {
                 guard let model = presenter.natureSounds?[indexPath.row] else { return }
-                presenter.play(audio: model.audioUrl, name: model.titleEn, time: timeOfPlay)
+                presenter.play(audio: model.audioUrl, name: model.titleEn, time: playTime)
                 cell.highlites(with: model)
             } else {
                 guard let model = presenter.noiseSounds?[indexPath.row] else { return }
-                presenter.play(audio: model.audioUrl, name: model.titleEn, time: timeOfPlay)
+                presenter.play(audio: model.audioUrl, name: model.titleEn, time: playTime)
                 cell.highlites(with: model)
             }
         }
@@ -411,8 +454,9 @@ extension MainViewController: MainViewControllerProtocol {
 }
 
 extension MainViewController: timerViewDelegate {
-    func timeButtonTapped(timer: Int) {
-        timeOfPlay = timer
+    func timeButtonTapped(playTime: Int) {
+        timerLabel.text = presenter.minutesToHoursAndMinutes(playTime)
+        self.playTime = playTime
         timerButtonTapped()
     }
 

@@ -26,6 +26,7 @@ protocol MainVCPresenterProtocol {
     func play(audio: String, name: String, time: Int)
     func pause()
     func changeVolume(volume: Float)
+    func minutesToHoursAndMinutes (_ minutes : Int) -> String?
 }
 
 class MainVCPresenter: MainVCPresenterProtocol {
@@ -35,6 +36,7 @@ class MainVCPresenter: MainVCPresenterProtocol {
     private let audioPlayer: AudioPlayerProtocol
     var natureSounds: [SoundModel]?
     var noiseSounds: [SoundModel]?
+    let formatter = DateComponentsFormatter()
 
 
     required init(view: MainViewControllerProtocol, networkService: NetworkService, audioPlayer: AudioPlayerProtocol) {
@@ -73,7 +75,7 @@ class MainVCPresenter: MainVCPresenterProtocol {
     func play(audio: String, name: String, time: Int) {
         audioPlayer.play(audio: audio, name: name)
         if time != 1 {
-            let seconds = TimeInterval(time * 60)//DispatchTime(uptimeNanoseconds: UInt64(time * 60))
+            let seconds = TimeInterval(time * 60)
             DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
                 guard let self = self else { return }
                 self.audioPlayer.pause()
@@ -88,10 +90,28 @@ class MainVCPresenter: MainVCPresenterProtocol {
     func changeVolume(volume: Float) {
         audioPlayer.changeVolume(volume: volume)
     }
+    
+    func minutesToHoursAndMinutes (_ minutes : Int) -> String? {
+        
+        let interval = minutes * 60
+        
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        let formattedString = formatter.string(from: TimeInterval(interval))!
+        
+//        let hour = minutes / 60
+//        let min = minutes % 60
+//        let seconds = (minutes % 3600) % 60
+//
+//        let hourString = String(hour)
+//        let minString = String(min)
+//        let secondsString = String(seconds)
+        
+        return formattedString
+    }
 
     private struct Inner {
         static let natureSound = "nature"
         static let noiseSound = "noise"
     }
-
 }
