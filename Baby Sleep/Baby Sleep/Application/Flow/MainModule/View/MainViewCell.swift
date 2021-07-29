@@ -74,8 +74,12 @@ class MainViewCell: UICollectionViewCell {
         nameLabel.font = UIFont(name: "MontserratAlternates-Regular", size: 16.0)
         nameLabel.textColor = .white
         nameLabel.snp.makeConstraints { make in
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                make.top.equalTo(image.snp.bottom).offset(10)
+            } else {
+                make.top.equalTo(image.snp.bottom).offset(16)
+            }
             make.centerX.equalTo(image)
-            make.top.equalTo(image.snp.bottom).offset(16)
             make.height.equalTo(20)
         }
     }
@@ -101,7 +105,12 @@ class MainViewCell: UICollectionViewCell {
         //Setup Constreints
         image.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(142)
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                make.height.equalTo(100)
+                make.width.equalTo(60)
+            } else {
+                make.height.equalTo(142)
+            }
         }
     }
 }

@@ -134,7 +134,7 @@ class MainViewController: UIViewController {
         //Setup constreints
         bottomImage.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
-                make.bottom.equalToSuperview().offset(40)
+                make.bottom.equalToSuperview().offset(100)
             } else {
                 make.bottom.equalToSuperview()
             }
@@ -155,11 +155,12 @@ class MainViewController: UIViewController {
         
         //Setup constreints
         natureLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(60)
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.top.equalToSuperview().offset(40)
+                make.leading.equalToSuperview().inset(50)
             } else {
                 make.top.equalToSuperview().offset(80)
+                make.leading.equalToSuperview().inset(60)
             }
             make.height.equalTo(24)
             make.width.equalTo(101)
@@ -186,11 +187,12 @@ class MainViewController: UIViewController {
         
         //Setup constreints
         noiseLable.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(61)
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.top.equalToSuperview().offset(40)
+                make.trailing.equalToSuperview().inset(51)
             } else {
                 make.top.equalToSuperview().offset(80)
+                make.trailing.equalToSuperview().inset(61)
             }
             make.height.equalTo(24)
             make.width.equalTo(53)
@@ -203,14 +205,18 @@ class MainViewController: UIViewController {
     }
     
     private func configureStopPlayButton() {
-        guard let image = UIImage(named: "Play") else { return }
+        guard let image = UIImage(named: "Pause") else { return }
         stopPlayButton.setImage(image, for: .normal)
         stopPlayButton.addTarget(self, action: #selector(playerPause), for: .touchUpInside)
         self.view.addSubview(stopPlayButton)
 
         //Setup constreints
         stopPlayButton.snp.makeConstraints { make in
-            make.bottom.equalTo(bottomImage.snp.bottom).inset(50)
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                make.bottom.equalTo(bottomImage.snp.bottom).inset(115)
+            } else {
+                make.bottom.equalTo(bottomImage.snp.bottom).inset(50)
+            }
             make.centerX.equalToSuperview()
         }
     }
@@ -229,8 +235,12 @@ class MainViewController: UIViewController {
 
         //Setup constreints
         volumeSlider.snp.makeConstraints { make in
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                make.width.equalTo(200)
+            } else {
+                make.width.equalTo(241)
+            }
             make.centerX.equalToSuperview()
-            make.width.equalTo(241)
             make.bottom.equalTo(stopPlayButton.snp.bottom).inset(60)
         }
         loudVolumeImage.snp.makeConstraints { make in
@@ -252,8 +262,14 @@ class MainViewController: UIViewController {
         timerButton.addTarget(self, action: #selector(showTimer), for: .touchUpInside)
         
         timerButton.snp.makeConstraints {
-            $0.bottom.equalTo(volumeSlider.snp.bottom).inset(50)
-            $0.trailing.equalToSuperview().inset(30)
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                $0.centerY.equalTo(stopPlayButton)
+                $0.trailing.equalToSuperview().inset(60)
+            } else {
+                $0.bottom.equalTo(volumeSlider.snp.bottom).inset(50)
+                $0.trailing.equalToSuperview().inset(30)
+            }
+            
             $0.width.height.equalTo(28)
         }
     }
@@ -265,7 +281,7 @@ class MainViewController: UIViewController {
         collectionView.dataSource = self
         
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 70, left: 10, bottom: 10, right: 10)
+//        layout.sectionInset = UIEdgeInsets(top: 70, left: 10, bottom: 10, right: 10)
         layout.minimumLineSpacing = 50
         layout.minimumInteritemSpacing = 10
         collectionView.collectionViewLayout = layout
@@ -325,10 +341,15 @@ class MainViewController: UIViewController {
         timerLabel.font = UIFont(name: "MontserratAlternates-Regular", size: 25.0)
         timerLabel.text = "15:00"
         timerLabel.textAlignment = .center
+        timerLabel.textColor = .white
         
         //Setup constraints
         timerLabel.snp.makeConstraints {
-            $0.centerX.equalTo(stopPlayButton)
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+                $0.leading.equalToSuperview().inset(10)
+            } else {
+                $0.centerX.equalTo(stopPlayButton)
+            }
             $0.centerY.equalTo(timerButton)
             $0.width.equalTo(100)
         }
@@ -382,6 +403,8 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
         if UIDevice.current.screenType == .iPhone_XSMax_11ProMax {
             return CGSize(width: 100, height: 176)
+        } else if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            return CGSize(width: 70, height: 110)
         } else {
             return CGSize(width: 100, height: 166)
         }
@@ -389,7 +412,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
-            return UIEdgeInsets(top: 30, left: 15, bottom: 0, right: 15)
+            return UIEdgeInsets(top: 35, left: 34, bottom: 20, right: 34)
         } else if UIDevice.current.screenType == .iPhone_XSMax_11ProMax {
             return UIEdgeInsets(top: 60, left: 34, bottom: 0, right: 34)
         } else {
@@ -426,10 +449,12 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
                 guard let model = presenter.natureSounds?[indexPath.row] else { return }
                 presenter.play(audio: model.audioUrl, name: model.titleEn, time: playTime)
                 cell.highlites(with: model)
+                stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
             } else {
                 guard let model = presenter.noiseSounds?[indexPath.row] else { return }
                 presenter.play(audio: model.audioUrl, name: model.titleEn, time: playTime)
                 cell.highlites(with: model)
+                stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
             }
         }
         HapticFeedback.add()
