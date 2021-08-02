@@ -108,6 +108,8 @@ class MainViewCell: UICollectionViewCell {
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.height.equalTo(100)
                 make.width.equalTo(60)
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+                make.height.equalTo(130)
             } else {
                 make.height.equalTo(142)
             }

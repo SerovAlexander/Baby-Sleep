@@ -177,8 +177,7 @@
 		04F59E6025757F8500A35094 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				04F5667F24B88CA6002FB386 /* AppDelegate.swift */,
-				04F5668124B88CA6002FB386 /* SceneDelegate.swift */,
+				0F65A15B26B7C87D00654249 /* Delegate */,
 				04F59E652575812300A35094 /* Flow */,
 				041210FA24E2940A00ED82BC /* Servises */,
 				04F59E7F2576364B00A35094 /* Core */,
@@ -209,10 +208,10 @@
 		04F59E652575812300A35094 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
-				04E9A6DB25DAFF600090C4D2 /* TimerModule */,
 				04F59E8925763E0E00A35094 /* ControllerBuilder.swift */,
 				04F59E67257581C000A35094 /* StarModule */,
 				04F59E6A2575821F00A35094 /* MainModule */,
+				04E9A6DB25DAFF600090C4D2 /* TimerModule */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -267,6 +266,15 @@
 				0F98274B26A1A7ED0001950E /* UIDeviceExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0F65A15B26B7C87D00654249 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				04F5667F24B88CA6002FB386 /* AppDelegate.swift */,
+				04F5668124B88CA6002FB386 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		C34B164CD64C171AC044B909 /* Frameworks */ = {

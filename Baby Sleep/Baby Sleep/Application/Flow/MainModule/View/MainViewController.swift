@@ -116,6 +116,8 @@ class MainViewController: UIViewController {
         topImage.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.top.equalToSuperview().offset(-68)
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8  {
+                make.top.equalToSuperview().offset(-40)
             } else {
                 make.top.equalToSuperview()
             }
@@ -135,6 +137,8 @@ class MainViewController: UIViewController {
         bottomImage.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.bottom.equalToSuperview().offset(100)
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8  {
+                make.bottom.equalToSuperview().offset(60)
             } else {
                 make.bottom.equalToSuperview()
             }
@@ -158,6 +162,9 @@ class MainViewController: UIViewController {
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.top.equalToSuperview().offset(40)
                 make.leading.equalToSuperview().inset(50)
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+                make.top.equalToSuperview().offset(50)
+                make.leading.equalToSuperview().inset(60)
             } else {
                 make.top.equalToSuperview().offset(80)
                 make.leading.equalToSuperview().inset(60)
@@ -188,12 +195,11 @@ class MainViewController: UIViewController {
         //Setup constreints
         noiseLable.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
-                make.top.equalToSuperview().offset(40)
                 make.trailing.equalToSuperview().inset(51)
             } else {
-                make.top.equalToSuperview().offset(80)
                 make.trailing.equalToSuperview().inset(61)
             }
+            make.centerY.equalTo(natureLabel)
             make.height.equalTo(24)
             make.width.equalTo(53)
         }
@@ -214,6 +220,8 @@ class MainViewController: UIViewController {
         stopPlayButton.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.bottom.equalTo(bottomImage.snp.bottom).inset(115)
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+                make.bottom.equalTo(bottomImage.snp.bottom).inset(80)
             } else {
                 make.bottom.equalTo(bottomImage.snp.bottom).inset(50)
             }
@@ -262,7 +270,7 @@ class MainViewController: UIViewController {
         timerButton.addTarget(self, action: #selector(showTimer), for: .touchUpInside)
         
         timerButton.snp.makeConstraints {
-            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE || UIDevice.current.screenType == .iPhones_6_6s_7_8 {
                 $0.centerY.equalTo(stopPlayButton)
                 $0.trailing.equalToSuperview().inset(60)
             } else {
@@ -281,7 +289,6 @@ class MainViewController: UIViewController {
         collectionView.dataSource = self
         
         let layout = UICollectionViewFlowLayout()
-//        layout.sectionInset = UIEdgeInsets(top: 70, left: 10, bottom: 10, right: 10)
         layout.minimumLineSpacing = 50
         layout.minimumInteritemSpacing = 10
         collectionView.collectionViewLayout = layout
@@ -345,8 +352,10 @@ class MainViewController: UIViewController {
         
         //Setup constraints
         timerLabel.snp.makeConstraints {
-            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE  {
                 $0.leading.equalToSuperview().inset(10)
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+                $0.leading.equalToSuperview().inset(20)
             } else {
                 $0.centerX.equalTo(stopPlayButton)
             }
@@ -405,6 +414,8 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             return CGSize(width: 100, height: 176)
         } else if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
             return CGSize(width: 70, height: 110)
+        } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+            return CGSize(width: 90, height: 140)
         } else {
             return CGSize(width: 100, height: 166)
         }
@@ -414,6 +425,10 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
             return UIEdgeInsets(top: 35, left: 34, bottom: 20, right: 34)
         } else if UIDevice.current.screenType == .iPhone_XSMax_11ProMax {
+            return UIEdgeInsets(top: 60, left: 34, bottom: 0, right: 34)
+        } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+            return UIEdgeInsets(top: 25, left: 34, bottom: 20, right: 34)
+        } else if UIDevice.current.screenType == .iPhone_XR_11 {
             return UIEdgeInsets(top: 60, left: 34, bottom: 0, right: 34)
         } else {
             return UIEdgeInsets(top: 46, left: 34, bottom: 43, right: 34)
