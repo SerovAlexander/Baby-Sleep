@@ -16,6 +16,7 @@ import Foundation
 protocol MainViewControllerProtocol: AnyObject {
     func succes()
     func failure(error: Error)
+    func updateTimerLabel(text: String)
 }
 
 protocol MainVCPresenterProtocol {
@@ -27,6 +28,7 @@ protocol MainVCPresenterProtocol {
     func pause()
     func changeVolume(volume: Float)
     func minutesToHoursAndMinutes (_ minutes : Int) -> String?
+    func timeFormatted(_ minutes: Int) -> String?
 }
 
 class MainVCPresenter: MainVCPresenterProtocol {
@@ -37,7 +39,7 @@ class MainVCPresenter: MainVCPresenterProtocol {
     var natureSounds: [SoundModel]?
     var noiseSounds: [SoundModel]?
     let formatter = DateComponentsFormatter()
-
+    private var timer: Timer?
 
     required init(view: MainViewControllerProtocol, networkService: NetworkService, audioPlayer: AudioPlayerProtocol) {
         self.view = view
@@ -58,6 +60,7 @@ class MainVCPresenter: MainVCPresenterProtocol {
                 self.view?.failure(error: error)
             }
         }
+
         networkService.fetchData(type: Inner.noiseSound) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -90,7 +93,7 @@ class MainVCPresenter: MainVCPresenterProtocol {
     func changeVolume(volume: Float) {
         audioPlayer.changeVolume(volume: volume)
     }
-    
+
     func minutesToHoursAndMinutes (_ minutes : Int) -> String? {
         
         let interval = minutes * 60
@@ -99,15 +102,15 @@ class MainVCPresenter: MainVCPresenterProtocol {
         formatter.unitsStyle = .positional
         let formattedString = formatter.string(from: TimeInterval(interval))!
         
-//        let hour = minutes / 60
-//        let min = minutes % 60
-//        let seconds = (minutes % 3600) % 60
-//
-//        let hourString = String(hour)
-//        let minString = String(min)
-//        let secondsString = String(seconds)
-        
         return formattedString
+    }
+    
+    func timeFormatted(_ minutes: Int) -> String? {
+        let totalSeconds = minutes * 60
+        
+        let seconds: Int = totalSeconds % 60
+        let minutes: Int = (totalSeconds / 60) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 
     private struct Inner {

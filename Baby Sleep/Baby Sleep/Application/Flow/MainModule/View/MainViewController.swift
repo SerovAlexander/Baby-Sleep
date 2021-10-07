@@ -116,7 +116,7 @@ class MainViewController: UIViewController {
         topImage.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.top.equalToSuperview().offset(-68)
-            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8  {
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8_SE2 || UIDevice.current.screenType == .iPhones_6Plus_6sPlus_7Plus_8Plus {
                 make.top.equalToSuperview().offset(-40)
             } else {
                 make.top.equalToSuperview()
@@ -137,7 +137,7 @@ class MainViewController: UIViewController {
         bottomImage.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.bottom.equalToSuperview().offset(100)
-            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8  {
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8_SE2 || UIDevice.current.screenType == .iPhones_6Plus_6sPlus_7Plus_8Plus{
                 make.bottom.equalToSuperview().offset(60)
             } else {
                 make.bottom.equalToSuperview()
@@ -156,13 +156,13 @@ class MainViewController: UIViewController {
         guard  let image = UIImage(named: "Oval") else { return }
         natureDot.image = image
         self.view.addSubview(natureDot)
-        
+
         //Setup constreints
         natureLabel.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.top.equalToSuperview().offset(40)
                 make.leading.equalToSuperview().inset(50)
-            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8_SE2 || UIDevice.current.screenType == .iPhones_6Plus_6sPlus_7Plus_8Plus {
                 make.top.equalToSuperview().offset(50)
                 make.leading.equalToSuperview().inset(60)
             } else {
@@ -172,6 +172,7 @@ class MainViewController: UIViewController {
             make.height.equalTo(24)
             make.width.equalTo(101)
         }
+
         natureDot.snp.makeConstraints { make in
             make.width.height.equalTo(6)
             make.centerX.equalTo(natureLabel)
@@ -220,7 +221,7 @@ class MainViewController: UIViewController {
         stopPlayButton.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.bottom.equalTo(bottomImage.snp.bottom).inset(115)
-            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8_SE2 || UIDevice.current.screenType == .iPhones_6Plus_6sPlus_7Plus_8Plus {
                 make.bottom.equalTo(bottomImage.snp.bottom).inset(80)
             } else {
                 make.bottom.equalTo(bottomImage.snp.bottom).inset(50)
@@ -270,7 +271,7 @@ class MainViewController: UIViewController {
         timerButton.addTarget(self, action: #selector(showTimer), for: .touchUpInside)
         
         timerButton.snp.makeConstraints {
-            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE || UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+            if UIDevice.current.screenType == .iPhones_5_5s_5c_SE || UIDevice.current.screenType == .iPhones_6_6s_7_8_SE2 || UIDevice.current.screenType == .iPhones_6Plus_6sPlus_7Plus_8Plus {
                 $0.centerY.equalTo(stopPlayButton)
                 $0.trailing.equalToSuperview().inset(60)
             } else {
@@ -354,7 +355,7 @@ class MainViewController: UIViewController {
         timerLabel.snp.makeConstraints {
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE  {
                 $0.leading.equalToSuperview().inset(10)
-            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+            } else if UIDevice.current.screenType == .iPhones_6_6s_7_8_SE2 ||  UIDevice.current.screenType == .iPhones_6Plus_6sPlus_7Plus_8Plus {
                 $0.leading.equalToSuperview().inset(20)
             } else {
                 $0.centerX.equalTo(stopPlayButton)
@@ -414,8 +415,10 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             return CGSize(width: 100, height: 176)
         } else if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
             return CGSize(width: 70, height: 110)
-        } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+        } else if UIDevice.current.screenType == .iPhones_6_6s_7_8_SE2 {
             return CGSize(width: 90, height: 140)
+        } else if UIDevice.current.screenType == .iPhones_X_XS || UIDevice.current.screenType == .iPhones_6Plus_6sPlus_7Plus_8Plus {
+            return CGSize(width: 90, height: 166)
         } else {
             return CGSize(width: 100, height: 166)
         }
@@ -426,10 +429,12 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             return UIEdgeInsets(top: 35, left: 34, bottom: 20, right: 34)
         } else if UIDevice.current.screenType == .iPhone_XSMax_11ProMax {
             return UIEdgeInsets(top: 60, left: 34, bottom: 0, right: 34)
-        } else if UIDevice.current.screenType == .iPhones_6_6s_7_8 {
+        } else if UIDevice.current.screenType == .iPhones_6_6s_7_8_SE2 {
             return UIEdgeInsets(top: 25, left: 34, bottom: 20, right: 34)
         } else if UIDevice.current.screenType == .iPhone_XR_11 {
             return UIEdgeInsets(top: 60, left: 34, bottom: 0, right: 34)
+        } else if UIDevice.current.screenType == .iPhones_X_XS || UIDevice.current.screenType == .iPhones_6Plus_6sPlus_7Plus_8Plus {
+            return UIEdgeInsets(top: 30, left: 25, bottom: 0, right: 25)
         } else {
             return UIEdgeInsets(top: 46, left: 34, bottom: 43, right: 34)
         }
@@ -460,6 +465,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? MainViewCell {
+            presenter.pause()
             if noiseFlag == false {
                 guard let model = presenter.natureSounds?[indexPath.row] else { return }
                 presenter.play(audio: model.audioUrl, name: model.titleEn, time: playTime)
@@ -483,7 +489,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 }
 
 extension MainViewController: MainViewControllerProtocol {
-
+    
     func succes() {
         collectionView.reloadData()
     }
@@ -491,11 +497,16 @@ extension MainViewController: MainViewControllerProtocol {
     func failure(error: Error) {
         print(error)
     }
+    
+    func updateTimerLabel(text: String) {
+        timerLabel.text = text
+    }
 }
 
 extension MainViewController: timerViewDelegate {
+
     func timeButtonTapped(playTime: Int) {
-        timerLabel.text = presenter.minutesToHoursAndMinutes(playTime)
+        timerLabel.text = presenter.timeFormatted(playTime)
         self.playTime = playTime
         timerButtonTapped()
     }
