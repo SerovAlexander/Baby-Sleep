@@ -8,7 +8,6 @@
 //
 // ----------------------------------------------------------------------------
 
-import FirebaseDatabase
 import Lottie
 import SnapKit
 import UIKit
@@ -20,34 +19,23 @@ class StartViewController: UIViewController {
     private let network = NetworkService()
 
     // MARK: - UI
+
     let startButton = UIButton()
+
     // View for animation with Lottie
     let backgroundView = AnimationView()
-    var sounds: [Sound] = []
 
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // get model for nature sounds
-        network.fetchData { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let sound):
-                self.sounds = sound
-                DispatchQueue.main.async {
-                    self.configureStartBitton()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
         configureBackgroundView()
+        configureStartButton()
     }
 
     // MARK: - Configure UI
 
-    private func configureStartBitton() {
+    private func configureStartButton() {
         startButton.backgroundColor = UIColor.buttonColor
         startButton.setTitle("Начать", for: .normal)
         startButton.layer.cornerRadius = 32
@@ -64,7 +52,7 @@ class StartViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(50)
         }
     }
-    
+
     private func configureBackgroundView() {
         self.view.addSubview(backgroundView)
         backgroundView.contentMode = .scaleAspectFill
@@ -82,9 +70,9 @@ class StartViewController: UIViewController {
     // MARK: - Private Methods
 
     @objc private func startButtonAction() {
-        let destinationVC = MainViewController()
-        destinationVC.natureSounds = sounds
+        let destinationVC = ControllerBuilder.createMainViewController()
         destinationVC.modalPresentationStyle = .fullScreen
         self.show(destinationVC, sender: nil)
+    
     }
 }

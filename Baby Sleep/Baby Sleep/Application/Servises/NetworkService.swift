@@ -13,18 +13,18 @@ import Foundation
 
 // ----------------------------------------------------------------------------
 
-class NetworkService {
+final class NetworkService {
 
     //MARK: - Public Methods
 
     let ref: DatabaseReference = Database.database().reference()
-    func fetchData(comletion: @escaping (Result<[Sound], Error>) -> Void) {
-        ref.child("sounds").child("nature").observe(.value) { snapshot in
+    func fetchData(type: String, comletion: @escaping (Result<[SoundModel], Error>) -> Void) {
+        ref.child("sounds").child(type).observe(.value) { snapshot in
             DispatchQueue.global().async {
-                var soundsArray = [Sound]()
+                var soundsArray = [SoundModel]()
                 for child in snapshot.children {
                     if let soundSnapshot = child as? DataSnapshot,
-                       let sound = Sound(snapshot: soundSnapshot) {
+                       let sound = SoundModel(snapshot: soundSnapshot) {
                         soundsArray.append(sound)
                     } else {
                         let error: Error = "Вот тут ошибка" as! Error

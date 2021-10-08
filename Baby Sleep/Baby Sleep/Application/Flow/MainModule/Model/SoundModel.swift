@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 //
-//  Model.swift
+//  SoundModel.swift
 //  Baby Sleep
 //
 //  Created by Aleksandr Serov on 12.07.2020.
@@ -15,7 +15,7 @@ import UIKit
 
 // ----------------------------------------------------------------------------
 
-struct Sound: Codable {
+public struct SoundModel: Codable {
     let titleEn: String
     let titleRu: String
     let imageUrl: String

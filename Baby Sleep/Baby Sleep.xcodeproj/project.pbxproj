@@ -7,31 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		045C94EE2576BB4C00A86876 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C94ED2576BB4C00A86876 /* AudioPlayer.swift */; };
+		045C94F22576C19300A86876 /* HapticFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045C94F12576C19300A86876 /* HapticFeedback.swift */; };
 		0489B6CD24D84A8A0059E949 /* background.json in Resources */ = {isa = PBXBuildFile; fileRef = 0489B6CC24D84A8A0059E949 /* background.json */; };
 		0489B6D024D8708D0059E949 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0489B6CF24D8708D0059E949 /* GoogleService-Info.plist */; };
 		0492468224DAC48D00E5273E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0492468124DAC48D00E5273E /* NetworkService.swift */; };
 		0496B48E24C1D87E00677EAA /* Montserra_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0496B48D24C1D87E00677EAA /* Montserra_Regular.ttf */; };
 		0496B49124C1EFE000677EAA /* MainViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0496B49024C1EFE000677EAA /* MainViewCell.swift */; };
 		04DAF59F24E5B0DD001E9C48 /* CachingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DAF59E24E5B0DD001E9C48 /* CachingService.swift */; };
+		04E84EC7258A1EA100A7CECA /* ChoiseTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E84EC6258A1EA100A7CECA /* ChoiseTimerView.swift */; };
+		04E84EE1258A204500A7CECA /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E84EE0258A204500A7CECA /* TimerView.swift */; };
+		04E9A6DE25DAFF9E0090C4D2 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E9A6DD25DAFF9D0090C4D2 /* TimerViewController.swift */; };
 		04F5668024B88CA6002FB386 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5667F24B88CA6002FB386 /* AppDelegate.swift */; };
 		04F5668224B88CA6002FB386 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5668124B88CA6002FB386 /* SceneDelegate.swift */; };
 		04F5668424B88CA6002FB386 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5668324B88CA6002FB386 /* StartViewController.swift */; };
 		04F5668924B88CA9002FB386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04F5668824B88CA9002FB386 /* Assets.xcassets */; };
 		04F5668C24B88CA9002FB386 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F5668A24B88CA9002FB386 /* LaunchScreen.storyboard */; };
-		04F5669524BAF975002FB386 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5669424BAF975002FB386 /* Model.swift */; };
+		04F5669524BAF975002FB386 /* SoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5669424BAF975002FB386 /* SoundModel.swift */; };
 		04F5669C24BB07E5002FB386 /* Montserrat_Alternates.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04F5669B24BB07E5002FB386 /* Montserrat_Alternates.ttf */; };
 		04F566A024BB0FD6002FB386 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5669F24BB0FD6002FB386 /* MainViewController.swift */; };
-		04F59E822576366E00A35094 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F59E812576366E00A35094 /* UIColorExtension.swift */; };
+		04F59E8A25763E0E00A35094 /* ControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F59E8925763E0E00A35094 /* ControllerBuilder.swift */; };
+		04F59E8F257642D700A35094 /* MainViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F59E8E257642D700A35094 /* MainViewControllerPresenter.swift */; };
+		0F3CBA5E2620896D006BF1E8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3CBA5D2620896D006BF1E8 /* UIColorExtensions.swift */; };
+		0F98274C26A1A7ED0001950E /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98274B26A1A7ED0001950E /* UIDeviceExtension.swift */; };
 		D119D954C87A003F2A472291 /* Pods_Baby_Sleep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		045C94ED2576BB4C00A86876 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		045C94F12576C19300A86876 /* HapticFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedback.swift; sourceTree = "<group>"; };
 		0489B6CC24D84A8A0059E949 /* background.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = background.json; sourceTree = "<group>"; };
 		0489B6CF24D8708D0059E949 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0492468124DAC48D00E5273E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		0496B48D24C1D87E00677EAA /* Montserra_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Montserra_Regular.ttf; sourceTree = "<group>"; };
 		0496B49024C1EFE000677EAA /* MainViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewCell.swift; sourceTree = "<group>"; };
 		04DAF59E24E5B0DD001E9C48 /* CachingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingService.swift; sourceTree = "<group>"; };
+		04E84EC6258A1EA100A7CECA /* ChoiseTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiseTimerView.swift; sourceTree = "<group>"; };
+		04E84EE0258A204500A7CECA /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		04E9A6DD25DAFF9D0090C4D2 /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		04F5667C24B88CA6002FB386 /* Baby Sleep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Baby Sleep.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F5667F24B88CA6002FB386 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04F5668124B88CA6002FB386 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,10 +52,13 @@
 		04F5668824B88CA9002FB386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04F5668B24B88CA9002FB386 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04F5668D24B88CA9002FB386 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		04F5669424BAF975002FB386 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		04F5669424BAF975002FB386 /* SoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundModel.swift; sourceTree = "<group>"; };
 		04F5669B24BB07E5002FB386 /* Montserrat_Alternates.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Montserrat_Alternates.ttf; sourceTree = "<group>"; };
 		04F5669F24BB0FD6002FB386 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		04F59E812576366E00A35094 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = ../../../../../../../UIColorExtension.swift; sourceTree = "<group>"; };
+		04F59E8925763E0E00A35094 /* ControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerBuilder.swift; sourceTree = "<group>"; };
+		04F59E8E257642D700A35094 /* MainViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerPresenter.swift; sourceTree = "<group>"; };
+		0F3CBA5D2620896D006BF1E8 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		0F98274B26A1A7ED0001950E /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		374DD1B2284686A1912976D8 /* Pods-Baby Sleep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baby Sleep.debug.xcconfig"; path = "Target Support Files/Pods-Baby Sleep/Pods-Baby Sleep.debug.xcconfig"; sourceTree = "<group>"; };
 		97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baby_Sleep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF3180EE80ACA435B37E96FD /* Pods-Baby Sleep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baby Sleep.release.xcconfig"; path = "Target Support Files/Pods-Baby Sleep/Pods-Baby Sleep.release.xcconfig"; sourceTree = "<group>"; };
@@ -65,8 +81,17 @@
 			children = (
 				0492468124DAC48D00E5273E /* NetworkService.swift */,
 				04DAF59E24E5B0DD001E9C48 /* CachingService.swift */,
+				045C94ED2576BB4C00A86876 /* AudioPlayer.swift */,
 			);
 			path = Servises;
+			sourceTree = "<group>";
+		};
+		045C94F02576C15800A86876 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				045C94F12576C19300A86876 /* HapticFeedback.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		0489B6CE24D84E500059E949 /* Animation JSON */ = {
@@ -80,9 +105,28 @@
 		0496B48F24C1EF9C00677EAA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04F5669F24BB0FD6002FB386 /* MainViewController.swift */,
 				0496B49024C1EFE000677EAA /* MainViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		04E84EDF258A1F6600A7CECA /* CustomUIView */ = {
+			isa = PBXGroup;
+			children = (
+				04E84EE0258A204500A7CECA /* TimerView.swift */,
+				04E84EC6258A1EA100A7CECA /* ChoiseTimerView.swift */,
+			);
+			path = CustomUIView;
+			sourceTree = "<group>";
+		};
+		04E9A6DB25DAFF600090C4D2 /* TimerModule */ = {
+			isa = PBXGroup;
+			children = (
+				04E84EDF258A1F6600A7CECA /* CustomUIView */,
+				04E9A6DD25DAFF9D0090C4D2 /* TimerViewController.swift */,
+			);
+			path = TimerModule;
 			sourceTree = "<group>";
 		};
 		04F5667324B88CA6002FB386 = {
@@ -116,17 +160,9 @@
 		04F5669324BAF943002FB386 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				04F5669424BAF975002FB386 /* Model.swift */,
+				04F5669424BAF975002FB386 /* SoundModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		04F5669624BB01F7002FB386 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				04F5669F24BB0FD6002FB386 /* MainViewController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		04F5669924BB0753002FB386 /* Fonts */ = {
@@ -141,8 +177,7 @@
 		04F59E6025757F8500A35094 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				04F5667F24B88CA6002FB386 /* AppDelegate.swift */,
-				04F5668124B88CA6002FB386 /* SceneDelegate.swift */,
+				0F65A15B26B7C87D00654249 /* Delegate */,
 				04F59E652575812300A35094 /* Flow */,
 				041210FA24E2940A00ED82BC /* Servises */,
 				04F59E7F2576364B00A35094 /* Core */,
@@ -173,8 +208,10 @@
 		04F59E652575812300A35094 /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				04F59E8925763E0E00A35094 /* ControllerBuilder.swift */,
 				04F59E67257581C000A35094 /* StarModule */,
 				04F59E6A2575821F00A35094 /* MainModule */,
+				04E9A6DB25DAFF600090C4D2 /* TimerModule */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -200,7 +237,7 @@
 			children = (
 				04F5669324BAF943002FB386 /* Model */,
 				0496B48F24C1EF9C00677EAA /* View */,
-				04F5669624BB01F7002FB386 /* Controllers */,
+				04F59E8D257641C800A35094 /* Presenter */,
 			);
 			path = MainModule;
 			sourceTree = "<group>";
@@ -208,17 +245,36 @@
 		04F59E7F2576364B00A35094 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				04F59E802576365800A35094 /* Extensions */,
+				045C94F02576C15800A86876 /* Helpers */,
+				0F3CBA5C2620896D006BF1E8 /* Extensions */,
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		04F59E802576365800A35094 /* Extensions */ = {
+		04F59E8D257641C800A35094 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				04F59E812576366E00A35094 /* UIColorExtension.swift */,
+				04F59E8E257642D700A35094 /* MainViewControllerPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		0F3CBA5C2620896D006BF1E8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0F3CBA5D2620896D006BF1E8 /* UIColorExtensions.swift */,
+				0F98274B26A1A7ED0001950E /* UIDeviceExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0F65A15B26B7C87D00654249 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				04F5667F24B88CA6002FB386 /* AppDelegate.swift */,
+				04F5668124B88CA6002FB386 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		C34B164CD64C171AC044B909 /* Frameworks */ = {
@@ -374,15 +430,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E84EE1258A204500A7CECA /* TimerView.swift in Sources */,
 				04F5668424B88CA6002FB386 /* StartViewController.swift in Sources */,
+				045C94F22576C19300A86876 /* HapticFeedback.swift in Sources */,
 				0492468224DAC48D00E5273E /* NetworkService.swift in Sources */,
+				04E9A6DE25DAFF9E0090C4D2 /* TimerViewController.swift in Sources */,
+				04F59E8F257642D700A35094 /* MainViewControllerPresenter.swift in Sources */,
 				04F5668024B88CA6002FB386 /* AppDelegate.swift in Sources */,
+				04E84EC7258A1EA100A7CECA /* ChoiseTimerView.swift in Sources */,
+				0F3CBA5E2620896D006BF1E8 /* UIColorExtensions.swift in Sources */,
 				04F566A024BB0FD6002FB386 /* MainViewController.swift in Sources */,
 				04F5668224B88CA6002FB386 /* SceneDelegate.swift in Sources */,
-				04F59E822576366E00A35094 /* UIColorExtension.swift in Sources */,
 				04DAF59F24E5B0DD001E9C48 /* CachingService.swift in Sources */,
+				04F59E8A25763E0E00A35094 /* ControllerBuilder.swift in Sources */,
 				0496B49124C1EFE000677EAA /* MainViewCell.swift in Sources */,
-				04F5669524BAF975002FB386 /* Model.swift in Sources */,
+				04F5669524BAF975002FB386 /* SoundModel.swift in Sources */,
+				045C94EE2576BB4C00A86876 /* AudioPlayer.swift in Sources */,
+				0F98274C26A1A7ED0001950E /* UIDeviceExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,18 +583,20 @@
 			baseConfigurationReference = 374DD1B2284686A1912976D8 /* Pods-Baby Sleep.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 996H53HT87;
 				INFOPLIST_FILE = "Baby Sleep/Environments/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Aleksandr-Serov.Baby-Sleep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -539,18 +605,20 @@
 			baseConfigurationReference = CF3180EE80ACA435B37E96FD /* Pods-Baby Sleep.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 996H53HT87;
 				INFOPLIST_FILE = "Baby Sleep/Environments/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Aleksandr-Serov.Baby-Sleep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
