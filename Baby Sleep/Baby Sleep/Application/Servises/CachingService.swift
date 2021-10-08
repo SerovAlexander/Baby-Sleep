@@ -21,16 +21,18 @@ class CashingService {
         let storage = Storage.storage()
         let storageRef = storage.reference()
         let isLandRef = storageRef.child(shortLink)
-        guard let localURL = getLocalUrl(fileName: fileName) else { return }
-        print(localURL)
-        
-        let downloadTask = isLandRef.write(toFile: localURL)
-        
-        downloadTask.observe(.success) { snapshot in
-            if let error = snapshot.error {
-                comletion(.failure(error))
-            } else {
-                comletion(.success(localURL))
+        if let localURL = getLocalUrl(fileName: fileName) {
+            comletion(.success(localURL))
+        } else {
+            guard let localURL = createLocalURL(fileName: fileName) else { return }
+            let downloadTask = isLandRef.write(toFile: localURL)
+            
+            downloadTask.observe(.success) { snapshot in
+                if let error = snapshot.error {
+                    comletion(.failure(error))
+                } else {
+                    comletion(.success(localURL))
+                }
             }
         }
     }
@@ -40,11 +42,17 @@ class CashingService {
     private func getLocalUrl(fileName: String) -> URL? {
         guard let cacheDir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
         let url = cacheDir.appendingPathComponent(fileName, isDirectory: true)
-
-        if !FileManager.default.fileExists(atPath: url.path) {
-            try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+        if FileManager.default.fileExists(atPath: url.path) {
+            return url
         }
-
+        return nil
+    }
+    
+    private func createLocalURL(fileName: String) -> URL? {
+        guard let cacheDir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
+        let url = cacheDir.appendingPathComponent(fileName, isDirectory: true)
+        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+        
         return url
     }
 }

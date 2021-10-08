@@ -31,6 +31,7 @@ class AudioPlayer: AudioPlayerProtocol {
                     try AVAudioSession.sharedInstance().setCategory(.playback)
                     try self.player = AVAudioPlayer(contentsOf: url)
                     guard let player = self.player else { return }
+                    player.prepareToPlay()
                     player.play()
                     player.numberOfLoops = -1
                 } catch {
