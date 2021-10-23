@@ -19,7 +19,7 @@ protocol BuilderModulProtocol {
 }
 
 class ControllerBuilder: BuilderModulProtocol {
-    static func createMainViewController() ->UIViewController {
+    static func createMainViewController() -> UIViewController {
         let mainViewController = MainViewController()
         let networkService = NetworkService()
         let audioService = AudioPlayer()

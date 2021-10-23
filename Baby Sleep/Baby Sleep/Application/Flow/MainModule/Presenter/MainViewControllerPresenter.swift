@@ -16,7 +16,7 @@ import Foundation
 protocol MainViewControllerProtocol: AnyObject {
     func succes()
     func failure(error: Error)
-    func updateTimerLabel(text: String)
+//    func updateTimerLabel(text: String)
 }
 
 protocol MainVCPresenterProtocol {
@@ -24,10 +24,9 @@ protocol MainVCPresenterProtocol {
     var natureSounds: [SoundModel]? { get set }
     var noiseSounds: [SoundModel]? { get set }
     func getSound()
-    func play(audio: String, name: String, time: Int)
+    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool)
     func pause()
     func changeVolume(volume: Float)
-    func minutesToHoursAndMinutes (_ minutes : Int) -> String?
     func timeFormatted(_ minutes: Int) -> String?
 }
 
@@ -75,14 +74,11 @@ class MainVCPresenter: MainVCPresenterProtocol {
         }
     }
 
-    func play(audio: String, name: String, time: Int) {
-        audioPlayer.play(audio: audio, name: name)
-        if time != 1 {
-            let seconds = TimeInterval(time * 60)
-            DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
-                guard let self = self else { return }
-                self.audioPlayer.pause()
-            }
+    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool) {
+        if isSelected {
+            audioPlayer.pause()
+        } else {
+            audioPlayer.play(audio: audio, name: name)
         }
     }
 
@@ -94,17 +90,6 @@ class MainVCPresenter: MainVCPresenterProtocol {
         audioPlayer.changeVolume(volume: volume)
     }
 
-    func minutesToHoursAndMinutes (_ minutes : Int) -> String? {
-        
-        let interval = minutes * 60
-        
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
-        let formattedString = formatter.string(from: TimeInterval(interval))!
-        
-        return formattedString
-    }
-    
     func timeFormatted(_ minutes: Int) -> String? {
         let totalSeconds = minutes * 60
         

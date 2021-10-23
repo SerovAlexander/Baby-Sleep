@@ -21,6 +21,7 @@ public struct SoundModel: Codable {
     let imageUrl: String
     let audioUrl: String
     var color: Color
+    var selected = false
 
     init(titleEn: String, titleRu: String, imageUrl: String, audioUrl: String, color: Color) {
         self.titleEn = titleEn

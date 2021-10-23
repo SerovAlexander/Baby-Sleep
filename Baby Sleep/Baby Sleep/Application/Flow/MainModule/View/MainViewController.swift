@@ -27,6 +27,8 @@ class MainViewController: UIViewController {
     private let storageRef = Storage.storage().reference()
     private let cashingService = CashingService()
     private var playTime = 15
+    private var playTimeInSeconds: Int = 15 * 60
+    var timer: Timer?
     
     // MARK: - UI
     private let topImage = UIImageView()
@@ -77,7 +79,7 @@ class MainViewController: UIViewController {
         convigureVisualEffectView()
     }
     
-    //MARK:- Configure UI
+    //MARK: - Configure UI
     private func convigureVisualEffectView() {
         let blureEffect = UIBlurEffect(style: .dark)
         visualEffectView.effect = blureEffect
@@ -466,19 +468,35 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? MainViewCell {
             presenter.pause()
+            timer?.invalidate()
             if noiseFlag == false {
                 guard let model = presenter.natureSounds?[indexPath.row] else { return }
-                presenter.play(audio: model.audioUrl, name: model.titleEn, time: playTime)
+                presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected)
                 cell.highlites(with: model)
                 stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
+                if model.selected == false {
+                    presenter.natureSounds?[indexPath.row].selected = true
+                    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+                } else {
+                    presenter.natureSounds?[indexPath.row].selected = false
+                    updateTimerLabel()
+                }
             } else {
-                guard let model = presenter.noiseSounds?[indexPath.row] else { return }
-                presenter.play(audio: model.audioUrl, name: model.titleEn, time: playTime)
-                cell.highlites(with: model)
-                stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
+                if noiseFlag == false {
+                    guard var model = presenter.noiseSounds?[indexPath.row] else { return }
+                    presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected)
+                    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+                    cell.highlites(with: model)
+                    stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
+                    if model.selected == false {
+                        model.selected = true
+                    } else {
+                        model.selected = false
+                    }
+                }
             }
+            HapticFeedback.add()
         }
-        HapticFeedback.add()
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -497,10 +515,6 @@ extension MainViewController: MainViewControllerProtocol {
     func failure(error: Error) {
         print(error)
     }
-    
-    func updateTimerLabel(text: String) {
-        timerLabel.text = text
-    }
 }
 
 extension MainViewController: timerViewDelegate {
@@ -508,6 +522,7 @@ extension MainViewController: timerViewDelegate {
     func timeButtonTapped(playTime: Int) {
         timerLabel.text = presenter.timeFormatted(playTime)
         self.playTime = playTime
+        self.playTimeInSeconds = playTime * 60
         timerButtonTapped()
     }
 
@@ -518,6 +533,23 @@ extension MainViewController: timerViewDelegate {
             self.timerCustomView.transform = CGAffineTransform(scaleX: 1.4 , y: 1.4)
         } completion: { (_) in
             self.timerCustomView.removeFromSuperview()
+        }
+    }
+}
+
+extension MainViewController {
+    
+    @objc func updateTimerLabel() {
+        if playTimeInSeconds > 0 {
+            let seconds: Int = playTimeInSeconds % 60
+            let minutes: Int = (playTimeInSeconds / 60) % 60
+            let aaa = String(format: "%02d:%02d", minutes, seconds)
+            
+            timerLabel.text = aaa
+            playTimeInSeconds -= 1
+        } else {
+            timer?.invalidate()
+            presenter.pause()
         }
     }
 }
