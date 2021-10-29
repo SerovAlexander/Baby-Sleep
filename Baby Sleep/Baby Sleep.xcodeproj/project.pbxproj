@@ -29,6 +29,17 @@
 		04F59E8A25763E0E00A35094 /* ControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F59E8925763E0E00A35094 /* ControllerBuilder.swift */; };
 		04F59E8F257642D700A35094 /* MainViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F59E8E257642D700A35094 /* MainViewControllerPresenter.swift */; };
 		0F3CBA5E2620896D006BF1E8 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3CBA5D2620896D006BF1E8 /* UIColorExtensions.swift */; };
+		0F41F025272C28C800C5BACE /* SubscriptionsID's.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F024272C28C800C5BACE /* SubscriptionsID's.swift */; };
+		0F41F029272C290400C5BACE /* SubscriptionViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F028272C290400C5BACE /* SubscriptionViewPresenter.swift */; };
+		0F41F02B272C291000C5BACE /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F02A272C291000C5BACE /* SubscriptionViewController.swift */; };
+		0F41F032272C29D400C5BACE /* PrivacyPolicyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F02D272C29D300C5BACE /* PrivacyPolicyButton.swift */; };
+		0F41F033272C29D400C5BACE /* PriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F02E272C29D400C5BACE /* PriceView.swift */; };
+		0F41F034272C29D400C5BACE /* BasicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F02F272C29D400C5BACE /* BasicButton.swift */; };
+		0F41F035272C29D400C5BACE /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F030272C29D400C5BACE /* GradientView.swift */; };
+		0F41F036272C29D400C5BACE /* TermsOfUseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F031272C29D400C5BACE /* TermsOfUseButton.swift */; };
+		0F41F038272C2A4800C5BACE /* DefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F037272C2A4800C5BACE /* DefaultsService.swift */; };
+		0F41F03B272C2A5200C5BACE /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F039272C2A5200C5BACE /* PurchaseManager.swift */; };
+		0F41F03C272C2A5200C5BACE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F03A272C2A5200C5BACE /* NotificationService.swift */; };
 		0F98274C26A1A7ED0001950E /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98274B26A1A7ED0001950E /* UIDeviceExtension.swift */; };
 		D119D954C87A003F2A472291 /* Pods_Baby_Sleep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +69,17 @@
 		04F59E8925763E0E00A35094 /* ControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerBuilder.swift; sourceTree = "<group>"; };
 		04F59E8E257642D700A35094 /* MainViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerPresenter.swift; sourceTree = "<group>"; };
 		0F3CBA5D2620896D006BF1E8 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		0F41F024272C28C800C5BACE /* SubscriptionsID's.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubscriptionsID's.swift"; sourceTree = "<group>"; };
+		0F41F028272C290400C5BACE /* SubscriptionViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionViewPresenter.swift; sourceTree = "<group>"; };
+		0F41F02A272C291000C5BACE /* SubscriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
+		0F41F02D272C29D300C5BACE /* PrivacyPolicyButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyButton.swift; sourceTree = "<group>"; };
+		0F41F02E272C29D400C5BACE /* PriceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceView.swift; sourceTree = "<group>"; };
+		0F41F02F272C29D400C5BACE /* BasicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicButton.swift; sourceTree = "<group>"; };
+		0F41F030272C29D400C5BACE /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		0F41F031272C29D400C5BACE /* TermsOfUseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfUseButton.swift; sourceTree = "<group>"; };
+		0F41F037272C2A4800C5BACE /* DefaultsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsService.swift; sourceTree = "<group>"; };
+		0F41F039272C2A5200C5BACE /* PurchaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		0F41F03A272C2A5200C5BACE /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		0F98274B26A1A7ED0001950E /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		374DD1B2284686A1912976D8 /* Pods-Baby Sleep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baby Sleep.debug.xcconfig"; path = "Target Support Files/Pods-Baby Sleep/Pods-Baby Sleep.debug.xcconfig"; sourceTree = "<group>"; };
 		97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baby_Sleep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +104,9 @@
 				0492468124DAC48D00E5273E /* NetworkService.swift */,
 				04DAF59E24E5B0DD001E9C48 /* CachingService.swift */,
 				045C94ED2576BB4C00A86876 /* AudioPlayer.swift */,
+				0F41F037272C2A4800C5BACE /* DefaultsService.swift */,
+				0F41F03A272C2A5200C5BACE /* NotificationService.swift */,
+				0F41F039272C2A5200C5BACE /* PurchaseManager.swift */,
 			);
 			path = Servises;
 			sourceTree = "<group>";
@@ -181,6 +206,7 @@
 				04F59E652575812300A35094 /* Flow */,
 				041210FA24E2940A00ED82BC /* Servises */,
 				04F59E7F2576364B00A35094 /* Core */,
+				0F41F02C272C29AD00C5BACE /* UIViewElements */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -212,6 +238,7 @@
 				04F59E67257581C000A35094 /* StarModule */,
 				04F59E6A2575821F00A35094 /* MainModule */,
 				04E9A6DB25DAFF600090C4D2 /* TimerModule */,
+				0F41F023272C28A400C5BACE /* SubscriptionModule */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -266,6 +293,44 @@
 				0F98274B26A1A7ED0001950E /* UIDeviceExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0F41F023272C28A400C5BACE /* SubscriptionModule */ = {
+			isa = PBXGroup;
+			children = (
+				0F41F027272C28F400C5BACE /* View */,
+				0F41F026272C28EB00C5BACE /* Presenter */,
+				0F41F024272C28C800C5BACE /* SubscriptionsID's.swift */,
+			);
+			path = SubscriptionModule;
+			sourceTree = "<group>";
+		};
+		0F41F026272C28EB00C5BACE /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				0F41F028272C290400C5BACE /* SubscriptionViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		0F41F027272C28F400C5BACE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F41F02A272C291000C5BACE /* SubscriptionViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F41F02C272C29AD00C5BACE /* UIViewElements */ = {
+			isa = PBXGroup;
+			children = (
+				0F41F02F272C29D400C5BACE /* BasicButton.swift */,
+				0F41F030272C29D400C5BACE /* GradientView.swift */,
+				0F41F02E272C29D400C5BACE /* PriceView.swift */,
+				0F41F02D272C29D300C5BACE /* PrivacyPolicyButton.swift */,
+				0F41F031272C29D400C5BACE /* TermsOfUseButton.swift */,
+			);
+			path = UIViewElements;
 			sourceTree = "<group>";
 		};
 		0F65A15B26B7C87D00654249 /* Delegate */ = {
@@ -430,18 +495,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F41F029272C290400C5BACE /* SubscriptionViewPresenter.swift in Sources */,
 				04E84EE1258A204500A7CECA /* TimerView.swift in Sources */,
+				0F41F025272C28C800C5BACE /* SubscriptionsID's.swift in Sources */,
 				04F5668424B88CA6002FB386 /* StartViewController.swift in Sources */,
 				045C94F22576C19300A86876 /* HapticFeedback.swift in Sources */,
 				0492468224DAC48D00E5273E /* NetworkService.swift in Sources */,
+				0F41F02B272C291000C5BACE /* SubscriptionViewController.swift in Sources */,
 				04E9A6DE25DAFF9E0090C4D2 /* TimerViewController.swift in Sources */,
 				04F59E8F257642D700A35094 /* MainViewControllerPresenter.swift in Sources */,
 				04F5668024B88CA6002FB386 /* AppDelegate.swift in Sources */,
+				0F41F03B272C2A5200C5BACE /* PurchaseManager.swift in Sources */,
 				04E84EC7258A1EA100A7CECA /* ChoiseTimerView.swift in Sources */,
 				0F3CBA5E2620896D006BF1E8 /* UIColorExtensions.swift in Sources */,
+				0F41F032272C29D400C5BACE /* PrivacyPolicyButton.swift in Sources */,
+				0F41F038272C2A4800C5BACE /* DefaultsService.swift in Sources */,
 				04F566A024BB0FD6002FB386 /* MainViewController.swift in Sources */,
+				0F41F03C272C2A5200C5BACE /* NotificationService.swift in Sources */,
+				0F41F035272C29D400C5BACE /* GradientView.swift in Sources */,
+				0F41F033272C29D400C5BACE /* PriceView.swift in Sources */,
 				04F5668224B88CA6002FB386 /* SceneDelegate.swift in Sources */,
+				0F41F034272C29D400C5BACE /* BasicButton.swift in Sources */,
 				04DAF59F24E5B0DD001E9C48 /* CachingService.swift in Sources */,
+				0F41F036272C29D400C5BACE /* TermsOfUseButton.swift in Sources */,
 				04F59E8A25763E0E00A35094 /* ControllerBuilder.swift in Sources */,
 				0496B49124C1EFE000677EAA /* MainViewCell.swift in Sources */,
 				04F5669524BAF975002FB386 /* SoundModel.swift in Sources */,

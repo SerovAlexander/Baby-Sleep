@@ -28,4 +28,14 @@ class ControllerBuilder: BuilderModulProtocol {
         
         return mainViewController
     }
+    
+    static func createSubscriptionController() -> UIViewController {
+        let subscriptionController = SubscriptionViewController()
+        let purchaseManager = PurchaseManager.shared
+        let presenter = SubscriptionViewPresenter(view: subscriptionController, purchaseManager: purchaseManager)
+        
+        subscriptionController.presenter = presenter
+        
+        return subscriptionController
+    }
 }
