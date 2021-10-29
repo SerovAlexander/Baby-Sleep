@@ -41,7 +41,6 @@
 		0F41F03B272C2A5200C5BACE /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F039272C2A5200C5BACE /* PurchaseManager.swift */; };
 		0F41F03C272C2A5200C5BACE /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F41F03A272C2A5200C5BACE /* NotificationService.swift */; };
 		0F98274C26A1A7ED0001950E /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F98274B26A1A7ED0001950E /* UIDeviceExtension.swift */; };
-		D119D954C87A003F2A472291 /* Pods_Baby_Sleep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,7 +81,6 @@
 		0F41F03A272C2A5200C5BACE /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		0F98274B26A1A7ED0001950E /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		374DD1B2284686A1912976D8 /* Pods-Baby Sleep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baby Sleep.debug.xcconfig"; path = "Target Support Files/Pods-Baby Sleep/Pods-Baby Sleep.debug.xcconfig"; sourceTree = "<group>"; };
-		97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baby_Sleep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF3180EE80ACA435B37E96FD /* Pods-Baby Sleep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baby Sleep.release.xcconfig"; path = "Target Support Files/Pods-Baby Sleep/Pods-Baby Sleep.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,7 +89,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D119D954C87A003F2A472291 /* Pods_Baby_Sleep.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +157,6 @@
 				04F5667E24B88CA6002FB386 /* Baby Sleep */,
 				04F5667D24B88CA6002FB386 /* Products */,
 				F6D93916E8E5541EFC320D86 /* Pods */,
-				C34B164CD64C171AC044B909 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -340,14 +336,6 @@
 				04F5668124B88CA6002FB386 /* SceneDelegate.swift */,
 			);
 			path = Delegate;
-			sourceTree = "<group>";
-		};
-		C34B164CD64C171AC044B909 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F6D93916E8E5541EFC320D86 /* Pods */ = {
