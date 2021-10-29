@@ -11,6 +11,8 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Database'
 pod 'FirebaseUI/Storage'
 pod 'FirebaseUI/Auth'
+pod 'ApphudSDK'
+pod 'SparrowKit'
 
   # Pods for Baby Sleep
 

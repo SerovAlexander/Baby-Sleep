@@ -8,7 +8,7 @@
 //
 // ----------------------------------------------------------------------------
 
-import FirebaseUI
+import FirebaseStorageUI
 import SnapKit
 import UIKit
 
