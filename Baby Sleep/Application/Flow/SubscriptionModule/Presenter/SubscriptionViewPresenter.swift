@@ -44,7 +44,6 @@ class SubscriptionViewPresenter: SubscriptionViewPresenterProtocol {
     required init (view: SubscriptionViewControllerProtocol, purchaseManager: PurchaseManager) {
         self.view = view
         self.purchaseManager = purchaseManager
-//        getPrices()
         addObserver()
     }
     
@@ -86,7 +85,8 @@ class SubscriptionViewPresenter: SubscriptionViewPresenterProtocol {
     }
     
     func addObserver() {
-        NotificationService.observe(event: .didFetchProducts) {
+        NotificationService.observe(event: .didFetchProducts) { [weak self] in
+            guard let self = self else { return }
             self.getPrices()
         }
     }

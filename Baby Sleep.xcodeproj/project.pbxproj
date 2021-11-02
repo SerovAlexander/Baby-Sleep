@@ -59,6 +59,7 @@
 		0FDC473027317711004FCBCE /* MontserratAlternates-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FDC471D27317710004FCBCE /* MontserratAlternates-ThinItalic.ttf */; };
 		0FDC473127317711004FCBCE /* MontserratAlternates-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FDC471E27317710004FCBCE /* MontserratAlternates-MediumItalic.ttf */; };
 		0FDC473227317711004FCBCE /* MontserratAlternates-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FDC471F27317711004FCBCE /* MontserratAlternates-Black.ttf */; };
+		0FDC47362731C6BB004FCBCE /* TimerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC47352731C6BB004FCBCE /* TimerViewPresenter.swift */; };
 		D119D954C87A003F2A472291 /* Pods_Baby_Sleep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		0FDC471D27317710004FCBCE /* MontserratAlternates-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-ThinItalic.ttf"; sourceTree = "<group>"; };
 		0FDC471E27317710004FCBCE /* MontserratAlternates-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-MediumItalic.ttf"; sourceTree = "<group>"; };
 		0FDC471F27317711004FCBCE /* MontserratAlternates-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Black.ttf"; sourceTree = "<group>"; };
+		0FDC47352731C6BB004FCBCE /* TimerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewPresenter.swift; sourceTree = "<group>"; };
 		374DD1B2284686A1912976D8 /* Pods-Baby Sleep.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baby Sleep.debug.xcconfig"; path = "Target Support Files/Pods-Baby Sleep/Pods-Baby Sleep.debug.xcconfig"; sourceTree = "<group>"; };
 		97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baby_Sleep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF3180EE80ACA435B37E96FD /* Pods-Baby Sleep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baby Sleep.release.xcconfig"; path = "Target Support Files/Pods-Baby Sleep/Pods-Baby Sleep.release.xcconfig"; sourceTree = "<group>"; };
@@ -184,8 +186,9 @@
 		04E9A6DB25DAFF600090C4D2 /* TimerModule */ = {
 			isa = PBXGroup;
 			children = (
+				0FDC47342731C69B004FCBCE /* TimerView */,
+				0FDC47332731C686004FCBCE /* TimerViewPresenter */,
 				04E84EDF258A1F6600A7CECA /* CustomUIView */,
-				04E9A6DD25DAFF9D0090C4D2 /* TimerViewController.swift */,
 			);
 			path = TimerModule;
 			sourceTree = "<group>";
@@ -396,6 +399,22 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
+		0FDC47332731C686004FCBCE /* TimerViewPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				0FDC47352731C6BB004FCBCE /* TimerViewPresenter.swift */,
+			);
+			path = TimerViewPresenter;
+			sourceTree = "<group>";
+		};
+		0FDC47342731C69B004FCBCE /* TimerView */ = {
+			isa = PBXGroup;
+			children = (
+				04E9A6DD25DAFF9D0090C4D2 /* TimerViewController.swift */,
+			);
+			path = TimerView;
+			sourceTree = "<group>";
+		};
 		C34B164CD64C171AC044B909 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,6 +570,7 @@
 			files = (
 				0F41F106272C46CB00C5BACE /* SubscriptionViewPresenter.swift in Sources */,
 				04E84EE1258A204500A7CECA /* TimerView.swift in Sources */,
+				0FDC47362731C6BB004FCBCE /* TimerViewPresenter.swift in Sources */,
 				0F41F105272C46CB00C5BACE /* SubscriptionsID's.swift in Sources */,
 				04F5668424B88CA6002FB386 /* StartViewController.swift in Sources */,
 				045C94F22576C19300A86876 /* HapticFeedback.swift in Sources */,

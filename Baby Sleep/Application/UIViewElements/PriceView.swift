@@ -36,7 +36,7 @@ class PriceView: UIButton {
 // ----------------------------------------------------------------------------
 
 extension PriceView {
-    public func setupPrice(_ price: String?) {
+    public func setupPrice(_ price: String) {
         priceLabel.text = price
     }
     

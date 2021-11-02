@@ -517,13 +517,29 @@ extension MainViewController: MainViewControllerProtocol {
     }
 }
 
-extension MainViewController: timerViewDelegate {
-
-    func timeButtonTapped(playTime: Int) {
+extension MainViewController: TimerViewDelegate {
+    
+    fileprivate func updateTimerLabelAfterTapped(_ playTime: Int) {
         timerLabel.text = presenter.timeFormatted(playTime)
         self.playTime = playTime
         self.playTimeInSeconds = playTime * 60
-        timerButtonTapped()
+    }
+    
+    func timeButtonTapped(playTime: Int, isPaid: Bool) {
+        if !isPaid {
+            updateTimerLabelAfterTapped(playTime)
+            timerButtonTapped()
+        } else {
+            if !PurchaseManager.shared.isUserPremium {
+                timerButtonTapped()
+                let vc = ControllerBuilder.createSubscriptionController()
+                
+                self.present(vc, completion: nil)
+            } else {
+                updateTimerLabelAfterTapped(playTime)
+                timerButtonTapped()
+            }
+        }
     }
 
     func timerButtonTapped() {

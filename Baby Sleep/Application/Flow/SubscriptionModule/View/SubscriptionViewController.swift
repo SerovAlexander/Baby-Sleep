@@ -136,6 +136,8 @@ private extension SubscriptionViewController {
 
     func setupCloseButton() {
         closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        
     }
 
     func setupRestoreButton() {
@@ -209,6 +211,10 @@ private extension SubscriptionViewController {
     
     @objc func restoreButtonTapped() {
         presenter.restoreTapped()
+    }
+    
+    @objc func closeButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

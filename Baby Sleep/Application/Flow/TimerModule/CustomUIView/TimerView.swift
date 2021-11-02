@@ -14,6 +14,10 @@ import UIKit
 // ----------------------------------------------------------------------------
 
 class TimerView: UIButton {
+    
+    //MARK: - Properties
+    
+    private(set) var isPaid: Bool { didSet { isPaid == true ? premiumState() : notPremiumState() } }
 
     // MARK: - UI
     private let timeLabel = UILabel()
@@ -26,21 +30,24 @@ class TimerView: UIButton {
     
     // MARK: - Init
     
-    init(frame: CGRect, time: String, timer: Int) {
+    init(frame: CGRect, time: String, timer: Int, isPaid: Bool) {
         self.timeString = time
         self.time = timer
+        self.isPaid = isPaid
         super.init(frame: frame)
         configure()
         setupConstreint()
+        checkIsPremium()
+        addObserver()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    convenience init(time: String, timer: Int) {
+    convenience init(time: String, timer: Int, isPaid: Bool) {
         let frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        self.init(frame: frame, time: time, timer: timer)
+        self.init(frame: frame, time: time, timer: timer, isPaid: isPaid)
     }
     
     private func configure() {
@@ -69,5 +76,29 @@ extension TimerView {
     
     @objc func touchUp() {
         timeLabel.alpha = 1
+    }
+}
+
+private extension TimerView {
+    func premiumState() {
+        self.backgroundColor = .systemGray
+    }
+    
+    func notPremiumState() {
+        self.backgroundColor = .red
+    }
+    
+    func checkIsPremium() {
+        if !PurchaseManager.shared.isUserPremium && isPaid == true {
+            self.backgroundColor = .systemGray
+        } else {
+            self.backgroundColor = .white
+        }
+    }
+    
+    func addObserver() {
+        NotificationService.observe(event: .premiumUpdated) {
+            self.checkIsPremium()
+        }
     }
 }
