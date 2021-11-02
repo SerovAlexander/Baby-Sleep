@@ -54,13 +54,13 @@ class ChoiseTimerView: UIView {
         conteinerView.addSubview(leftStackView)
         conteinerView.addSubview(timerButton)
         
-        rightStackView.addArrangedSubview(thirtyView)
-        rightStackView.addArrangedSubview(hourView)
-        rightStackView.addArrangedSubview(infinityView)
+        rightStackView.addArrangedSubview(fifteenView)
+        rightStackView.addArrangedSubview(fortyfiveView)
+        rightStackView.addArrangedSubview(twoHourView)
         
-        leftStackView.addArrangedSubview(fifteenView)
-        leftStackView.addArrangedSubview(fortyfiveView)
-        leftStackView.addArrangedSubview(twoHourView)
+        leftStackView.addArrangedSubview(thirtyView)
+        leftStackView.addArrangedSubview(hourView)
+        leftStackView.addArrangedSubview(infinityView)
     }
     
     private func configureConteinerView() {

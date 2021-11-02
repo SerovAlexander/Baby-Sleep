@@ -467,11 +467,11 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? MainViewCell {
-            presenter.pause()
+//            presenter.pause()
             timer?.invalidate()
             if noiseFlag == false {
                 guard let model = presenter.natureSounds?[indexPath.row] else { return }
-                presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected)
+                presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected, volume: volumeSlider.value)
                 cell.highlites(with: model)
                 stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
                 if model.selected == false {
@@ -484,7 +484,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             } else {
                 if noiseFlag == false {
                     guard var model = presenter.noiseSounds?[indexPath.row] else { return }
-                    presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected)
+                    presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected, volume: volumeSlider.value)
                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
                     cell.highlites(with: model)
                     stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)

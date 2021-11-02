@@ -24,6 +24,8 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>MontserratAlternates-Regular.ttf</string>
+		<string>MontserratAlternates-SemiBold.ttf</string>
 		<string>Montserrat_Alternates.ttf</string>
 		<string>Montserra_Regular.ttf</string>
 	</array>

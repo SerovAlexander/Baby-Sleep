@@ -24,7 +24,7 @@ protocol MainVCPresenterProtocol {
     var natureSounds: [SoundModel]? { get set }
     var noiseSounds: [SoundModel]? { get set }
     func getSound()
-    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool)
+    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool, volume: Float)
     func pause()
     func changeVolume(volume: Float)
     func timeFormatted(_ minutes: Int) -> String?
@@ -74,16 +74,17 @@ class MainVCPresenter: MainVCPresenterProtocol {
         }
     }
 
-    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool) {
+    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool, volume: Float) {
         if isSelected {
-            audioPlayer.pause()
+            pause()
         } else {
-            audioPlayer.play(audio: audio, name: name)
+            audioPlayer.play(audio: audio, name: name, volume: volume)
         }
     }
 
     func pause() {
-        audioPlayer.pause()
+        audioPlayer.fadeVolumeAndPause()
+        
     }
 
     func changeVolume(volume: Float) {

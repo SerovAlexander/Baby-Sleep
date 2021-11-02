@@ -142,6 +142,7 @@ private extension SubscriptionViewController {
         restoreButton.setTitle("Restore Purchases", for: .normal)
         restoreButton.setTitleColor(.white, for: .normal)
         restoreButton.titleLabel?.font = UIFont(name: "MontserratAlternates-Regular", size: 13.0)
+        restoreButton.addTarget(self, action: #selector(restoreButtonTapped), for: .touchUpInside)
     }
 
     func sutupMainTitleLabel() {
@@ -179,6 +180,9 @@ private extension SubscriptionViewController {
         yearPriceView.setupId(.oneYear)
         mounthPriceView.setupId(.oneMonth)
         weekPriceView.setupId(.oneWeek)
+        yearPriceView.setupPeriod("Year")
+        weekPriceView.setupPeriod("Week")
+        mounthPriceView.setupPeriod("Month")
         yearPriceView.addTarget(self, action: #selector(priceButtonTapped(_:)), for: UIControl.Event.touchUpInside)
         weekPriceView.addTarget(self, action: #selector(priceButtonTapped(_:)), for: UIControl.Event.touchUpInside)
         mounthPriceView.addTarget(self, action: #selector(priceButtonTapped(_:)), for: UIControl.Event.touchUpInside)
@@ -196,21 +200,34 @@ private extension SubscriptionViewController {
         subscribeView.isSelected = true
         subscribeView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         presenter.currentSubscriptionId = subscribeView.subscriptionId
-        print(presenter.currentSubscriptionId!)
+        print(presenter.currentSubscriptionId)
     }
 
     @objc func continueButtonTapped() {
         presenter.buyTapped()
+    }
+    
+    @objc func restoreButtonTapped() {
+        presenter.restoreTapped()
     }
 }
 
 extension SubscriptionViewController: SubscriptionViewControllerProtocol {
     func isPurchasing(_ isPurchasing: Bool) {
         print("isPurchasing")
+        continueButton.isLoading = true
+        restoreButton.isEnabled = false
+        weekPriceView.isUserInteractionEnabled = false
+        mounthPriceView.isUserInteractionEnabled = false
+        yearPriceView.isUserInteractionEnabled = false
     }
 
     func isRestoring(_ isRestoring: Bool) {
-        print("isRestoring")
+        restoreButton.isLoading = true
+        continueButton.isEnabled = false
+        weekPriceView.isUserInteractionEnabled = false
+        mounthPriceView.isUserInteractionEnabled = false
+        yearPriceView.isUserInteractionEnabled = false
     }
 
     func updatePrice() {
@@ -225,6 +242,11 @@ extension SubscriptionViewController: SubscriptionViewControllerProtocol {
 
     func purchaseError() {
         print("purchaseError")
+        continueButton.isLoading = false
+        restoreButton.isEnabled = true
+        weekPriceView.isUserInteractionEnabled = true
+        mounthPriceView.isUserInteractionEnabled = true
+        yearPriceView.isUserInteractionEnabled = true
     }
 
     func restoreSuccess() {
@@ -233,6 +255,11 @@ extension SubscriptionViewController: SubscriptionViewControllerProtocol {
 
     func restoreError() {
         print("restoreError")
+        restoreButton.isLoading = false
+        continueButton.isEnabled = true
+        weekPriceView.isUserInteractionEnabled = true
+        mounthPriceView.isUserInteractionEnabled = true
+        yearPriceView.isUserInteractionEnabled = true
     }
 
     func userCancaled() {

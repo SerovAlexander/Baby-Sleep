@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             _ = user.uid
         }
 
+        PurchaseManager.shared.start()
+        
         return true
     }
 

@@ -21,7 +21,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowsScene.coordinateSpace.bounds)
         self.window?.windowScene = windowsScene
         self.window?.makeKeyAndVisible()
-        self.window?.rootViewController = ControllerBuilder.createSubscriptionController()
+        self.window?.rootViewController = ControllerBuilder.createMainViewController()
     }
 }
-

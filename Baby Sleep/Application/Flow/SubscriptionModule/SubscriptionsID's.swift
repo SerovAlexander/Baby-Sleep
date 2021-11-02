@@ -9,7 +9,7 @@
 import Foundation
 
 enum Subscriptions: String, CaseIterable {
-    case oneYear = "OneYear"
-    case oneMonth = "oneMonth"
-    case oneWeek = "oneWeek"
+    case oneYear = "com.whysohot.vpn.one.year"
+    case oneMonth = "com.whysohot.vpn.one.month"
+    case oneWeek = "com.whysohot.vpn.one.week"
 }
