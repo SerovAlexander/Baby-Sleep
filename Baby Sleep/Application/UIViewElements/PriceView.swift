@@ -103,6 +103,7 @@ private extension PriceView {
         priceLabel.font = UIFont(name: "MontserratAlternates-SemiBold", size: 22)
         priceLabel.adjustsFontSizeToFitWidth = true
         priceLabel.minimumScaleFactor = 0.5
+        priceLabel.textAlignment = .center
     }
     
     func setupPeriodLabel() {

@@ -51,9 +51,9 @@ class AudioPlayer: AudioPlayerProtocol {
     
     func fadeVolumeAndPause() {
         if player?.volume ?? 0.1 > 0.0 {
-            player?.volume = self.player!.volume - 0.1
+            player?.volume = self.player!.volume - 0.05
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.fadeVolumeAndPause()
             }
         } else {

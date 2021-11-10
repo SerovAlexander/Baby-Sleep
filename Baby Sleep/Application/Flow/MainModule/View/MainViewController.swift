@@ -214,7 +214,7 @@ class MainViewController: UIViewController {
     }
     
     private func configureStopPlayButton() {
-        guard let image = UIImage(named: "Pause") else { return }
+        guard let image = UIImage(named: "Play") else { return }
         stopPlayButton.setImage(image, for: .normal)
         stopPlayButton.addTarget(self, action: #selector(playerPause), for: .touchUpInside)
         self.view.addSubview(stopPlayButton)
@@ -467,18 +467,19 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? MainViewCell {
-//            presenter.pause()
             timer?.invalidate()
             if noiseFlag == false {
                 guard let model = presenter.natureSounds?[indexPath.row] else { return }
                 presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected, volume: volumeSlider.value)
-                cell.highlites(with: model)
                 stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
                 if model.selected == false {
                     presenter.natureSounds?[indexPath.row].selected = true
                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+                    cell.highlites(with: model)
                 } else {
                     presenter.natureSounds?[indexPath.row].selected = false
+                    cell.deleteHighlites()
+                    stopPlayButton.setImage(UIImage(named: "Play"), for: .normal)
                     updateTimerLabel()
                 }
             } else {

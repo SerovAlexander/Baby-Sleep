@@ -37,6 +37,8 @@ class SubscriptionViewController: UIViewController {
         weekPriceView.isSelected = false
         mounthPriceView.isSelected = false
         backGroundView.isUserInteractionEnabled = true
+        getPrices()
+        addObserver()
     }
 }
 
@@ -215,6 +217,19 @@ private extension SubscriptionViewController {
     
     @objc func closeButtonTapped() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func addObserver() {
+        NotificationService.observe(event: .didFetchProducts) { [weak self] in
+            guard let self = self else { return }
+            self.getPrices()
+        }
+    }
+    
+    func getPrices() {
+        yearPriceView.setupPrice(PurchaseManager.shared.priceFor(productWithID: Subscriptions.oneYear.rawValue))
+        weekPriceView.setupPrice(PurchaseManager.shared.priceFor(productWithID: Subscriptions.oneMonth.rawValue))
+        mounthPriceView.setupPrice(PurchaseManager.shared.priceFor(productWithID: Subscriptions.oneWeek.rawValue))
     }
 }
 
