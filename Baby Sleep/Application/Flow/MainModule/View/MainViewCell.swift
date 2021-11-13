@@ -68,6 +68,9 @@ class MainViewCell: UICollectionViewCell {
         let ref = storageRef.child(model.imageUrl)
         image.sd_setImage(with: ref, placeholderImage: UIImage(named: model.titleEn))
         deleteHighlites()
+        if model.selected {
+            highlites(with: model)
+        }
     }
 
     // MARK: - Private Methods

@@ -21,28 +21,30 @@ class AudioPlayer: AudioPlayerProtocol {
     private var player: AVAudioPlayer?
 
     func play(audio: String, name: String, volume: Float) {
-        self.cashingService.cashingAudio(shortLink: audio, fileName: name, comletion: { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let url):
-                do {
-                    try AVAudioSession.sharedInstance().setMode(.default)
-                    try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-                    try AVAudioSession.sharedInstance().setCategory(.playback)
-                    try self.player = AVAudioPlayer(contentsOf: url)
-                    guard let player = self.player else { return }
-                    player.volume = 0
-                    player.prepareToPlay()
-                    player.play()
-                    player.setVolume(volume, fadeDuration: 10)
-                    player.numberOfLoops = -1
-                } catch {
-                    print("Play error \(error)")
+        DispatchQueue.main.async {
+            self.cashingService.cashingAudio(shortLink: audio, fileName: name, comletion: { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success(let url):
+                    do {
+                        try AVAudioSession.sharedInstance().setMode(.default)
+                        try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+                        try AVAudioSession.sharedInstance().setCategory(.playback)
+                        try self.player = AVAudioPlayer(contentsOf: url)
+                        guard let player = self.player else { return }
+                        player.volume = 0
+                        player.prepareToPlay()
+                        player.play()
+                        player.setVolume(volume, fadeDuration: 10)
+                        player.numberOfLoops = -1
+                    } catch {
+                        print("Play error \(error)")
+                    }
+                case .failure( _):
+                    print("ошибка тут")
                 }
-            case .failure( _):
-                print("ошибка тут")
-            }
-        })
+            })
+        }
     }
 
     func changeVolume(volume: Float) {

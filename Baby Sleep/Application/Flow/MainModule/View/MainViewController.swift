@@ -28,6 +28,7 @@ class MainViewController: UIViewController {
     private let cashingService = CashingService()
     private var playTime = 15
     private var playTimeInSeconds: Int = 15 * 60
+    private var selectIndexPath: IndexPath?
     var timer: Timer?
     
     // MARK: - UI
@@ -158,7 +159,7 @@ class MainViewController: UIViewController {
         guard  let image = UIImage(named: "Oval") else { return }
         natureDot.image = image
         self.view.addSubview(natureDot)
-
+        
         //Setup constreints
         natureLabel.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
@@ -174,7 +175,7 @@ class MainViewController: UIViewController {
             make.height.equalTo(24)
             make.width.equalTo(101)
         }
-
+        
         natureDot.snp.makeConstraints { make in
             make.width.height.equalTo(6)
             make.centerX.equalTo(natureLabel)
@@ -217,8 +218,12 @@ class MainViewController: UIViewController {
         guard let image = UIImage(named: "Play") else { return }
         stopPlayButton.setImage(image, for: .normal)
         stopPlayButton.addTarget(self, action: #selector(playerPause), for: .touchUpInside)
+        if presenter.lastPlaying == nil {
+            stopPlayButton.alpha = 0.5
+            stopPlayButton.isEnabled = false
+        }
         self.view.addSubview(stopPlayButton)
-
+        
         //Setup constreints
         stopPlayButton.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
@@ -231,7 +236,7 @@ class MainViewController: UIViewController {
             make.centerX.equalToSuperview()
         }
     }
-
+    
     private func configureVolumeSlider() {
         guard let loudImage = UIImage(named: "SoundLoud") else { return }
         guard let quiteImage = UIImage(named: "SoundQuiet") else { return }
@@ -243,7 +248,7 @@ class MainViewController: UIViewController {
         self.view.addSubview(volumeSlider)
         self.view.addSubview(loudVolumeImage)
         self.view.addSubview(quiteVolumeImage)
-
+        
         //Setup constreints
         volumeSlider.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
@@ -263,7 +268,7 @@ class MainViewController: UIViewController {
             make.trailing.equalTo(volumeSlider.snp.leading).offset(-16)
         }
     }
-
+    
     private func configureTimerButton() {
         self.view.addSubview(timerButton)
         guard let timer = UIImage(named: "timer") else { return }
@@ -284,7 +289,7 @@ class MainViewController: UIViewController {
             $0.width.height.equalTo(28)
         }
     }
-
+    
     private func configureCollectionView() {
         self.view.addSubview(collectionView)
         collectionView.backgroundColor = .background
@@ -296,7 +301,7 @@ class MainViewController: UIViewController {
         layout.minimumInteritemSpacing = 10
         collectionView.collectionViewLayout = layout
         
-
+        
         //Setup constraints
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
@@ -304,12 +309,12 @@ class MainViewController: UIViewController {
             make.bottom.equalTo(bottomImage.snp.top)
         }
     }
-
+    
     private func configureTopTriangle() {
         guard let image = UIImage(named: "triangletop") else { return }
         topTriangle.image = image
         self.view.addSubview(topTriangle)
-
+        
         //Setup constraints
         topTriangle.snp.makeConstraints { make in
             make.trailing.equalToSuperview()
@@ -317,12 +322,12 @@ class MainViewController: UIViewController {
             make.width.height.equalTo(80)
         }
     }
-
+    
     private func configureBottomTriangle() {
         guard let image = UIImage(named: "trianglebottom") else { return }
         bottomTriangle.image = image
         self.view.addSubview(bottomTriangle)
-
+        
         //Setup constraints
         bottomTriangle.snp.makeConstraints { make in
             make.leading.equalToSuperview()
@@ -330,7 +335,7 @@ class MainViewController: UIViewController {
             make.width.height.equalTo(80)
         }
     }
-
+    
     private func configureConteinerView() {
         self.view.addSubview(timerCustomView)
         timerCustomView.layer.cornerRadius = 25
@@ -348,10 +353,11 @@ class MainViewController: UIViewController {
     
     private func configureTimeLabel() {
         view.addSubview(timerLabel)
-        timerLabel.font = UIFont(name: "MontserratAlternates-Regular", size: 25.0)
+        timerLabel.font = UIFont.monospacedDigitSystemFont(ofSize: 25, weight: .regular) //(name: "MontserratAlternates-Regular", size: 25.0)
         timerLabel.text = "15:00"
         timerLabel.textAlignment = .center
         timerLabel.textColor = .white
+        timerLabel.adjustsFontSizeToFitWidth = false
         
         //Setup constraints
         timerLabel.snp.makeConstraints {
@@ -363,12 +369,11 @@ class MainViewController: UIViewController {
                 $0.centerX.equalTo(stopPlayButton)
             }
             $0.centerY.equalTo(timerButton)
-            $0.width.equalTo(100)
         }
     }
-
+    
     //MARK:- Private Methods
-
+    
     @objc private func natureButtonAction() {
         noiseFlag = false
         noiseDot.isHidden = true
@@ -377,7 +382,7 @@ class MainViewController: UIViewController {
         natureLabel.titleLabel?.alpha = 1
         collectionView.reloadData()
     }
-
+    
     @objc private func noiseButtonAction() {
         noiseFlag = true
         natureDot.isHidden = true
@@ -386,20 +391,27 @@ class MainViewController: UIViewController {
         noiseLable.titleLabel?.alpha = 1
         collectionView.reloadData()
     }
-
-    @objc private func playerPause(){
-        presenter.pause()
-        stopPlayButton.setImage(UIImage(named: "Play"), for: .normal)
+    
+    @objc private func playerPause() {
+        if !presenter.isPlaying {
+            presenter.playStopTogle(audio: presenter.lastPlaying?.audioUrl ?? "", name: presenter.lastPlaying?.titleEn ?? "", time: playTime, isSelected: false, volume: volumeSlider.value)
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+            stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
+        } else {
+            presenter.pause()
+            stopPlayButton.setImage(UIImage(named: "Play"), for: .normal)
+            timer?.invalidate()
+        }
     }
-
+    
     @objc private func changeVolume(_ slider: UISlider) {
         let value = volumeSlider.value
         presenter.changeVolume(volume: value)
     }
     
     @objc private func showTimer() {
-            self.configureConteinerView()
-            self.animateIn()
+        self.configureConteinerView()
+        self.animateIn()
     }
     
     @objc private func closeTimerView(sender: UIView) {
@@ -410,9 +422,9 @@ class MainViewController: UIViewController {
 // ----------------------------------------------------------------------------
 
 extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         if UIDevice.current.screenType == .iPhone_XSMax_11ProMax {
             return CGSize(width: 100, height: 176)
         } else if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
@@ -441,7 +453,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             return UIEdgeInsets(top: 46, left: 34, bottom: 43, right: 34)
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if noiseFlag == true {
             return presenter.noiseSounds?.count ?? 0
@@ -449,7 +461,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             return presenter.natureSounds?.count ?? 0
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if noiseFlag == true {
             guard let model = presenter.noiseSounds?[indexPath.row] else { return UICollectionViewCell() }
@@ -464,37 +476,70 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        resetTimerLabel()
+        timer?.invalidate()
         if let cell = collectionView.cellForItem(at: indexPath) as? MainViewCell {
-            timer?.invalidate()
             if noiseFlag == false {
                 guard let model = presenter.natureSounds?[indexPath.row] else { return }
+                presenter.lastPlaying = model
                 presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected, volume: volumeSlider.value)
-                stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
                 if model.selected == false {
-                    presenter.natureSounds?[indexPath.row].selected = true
+                    if selectIndexPath != nil {
+                        presenter.natureSounds?[selectIndexPath!.row].selected = false
+                        presenter.noiseSounds?[selectIndexPath!.row].selected = false
+                        selectIndexPath = indexPath
+                    } else {
+                        selectIndexPath = indexPath
+                    }
+                    
                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+                    presenter.natureSounds?[indexPath.row].selected = true
+                    stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
+                    stopPlayButton.alpha = 1
+                    stopPlayButton.isEnabled = true
                     cell.highlites(with: model)
                 } else {
+                    timer?.invalidate()
                     presenter.natureSounds?[indexPath.row].selected = false
                     cell.deleteHighlites()
                     stopPlayButton.setImage(UIImage(named: "Play"), for: .normal)
-                    updateTimerLabel()
+                    stopPlayButton.alpha = 0.5
+                    stopPlayButton.isEnabled = false
+                    presenter.lastPlaying = nil
+                    resetTimerLabel()
                 }
             } else {
-                if noiseFlag == false {
-                    guard var model = presenter.noiseSounds?[indexPath.row] else { return }
-                    presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected, volume: volumeSlider.value)
-                    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
-                    cell.highlites(with: model)
-                    stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
-                    if model.selected == false {
-                        model.selected = true
+                guard let model = presenter.noiseSounds?[indexPath.row] else { return }
+                presenter.lastPlaying = model
+                presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected, volume: volumeSlider.value)
+                if model.selected == false {
+                    if selectIndexPath != nil {
+                        presenter.noiseSounds?[selectIndexPath!.row].selected = false
+                        presenter.natureSounds?[selectIndexPath!.row].selected = false
+                        selectIndexPath = indexPath
                     } else {
-                        model.selected = false
+                        selectIndexPath = indexPath
                     }
+                    
+                    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+                    presenter.noiseSounds?[indexPath.row].selected = true
+                    stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
+                    stopPlayButton.alpha = 1
+                    stopPlayButton.isEnabled = true
+                    cell.highlites(with: model)
+                } else {
+                    timer?.invalidate()
+                    presenter.noiseSounds?[indexPath.row].selected = false
+                    cell.deleteHighlites()
+                    stopPlayButton.setImage(UIImage(named: "Play"), for: .normal)
+                    stopPlayButton.alpha = 0.5
+                    stopPlayButton.isEnabled = false
+                    presenter.lastPlaying = nil
+                    resetTimerLabel()
                 }
+
             }
             HapticFeedback.add()
         }
@@ -542,7 +587,7 @@ extension MainViewController: TimerViewDelegate {
             }
         }
     }
-
+    
     func timerButtonTapped() {
         UIView.animate(withDuration: 0.4) {
             self.visualEffectView.alpha = 0
@@ -560,7 +605,9 @@ extension MainViewController {
         if playTimeInSeconds > 0 {
             let seconds: Int = playTimeInSeconds % 60
             let minutes: Int = (playTimeInSeconds / 60) % 60
-            let aaa = String(format: "%02d:%02d", minutes, seconds)
+            let hour: Int = playTimeInSeconds / 3600
+            let aaa = String(format: "%02d:%02d:%02d", hour, minutes, seconds)
+            
             
             timerLabel.text = aaa
             playTimeInSeconds -= 1
@@ -568,5 +615,15 @@ extension MainViewController {
             timer?.invalidate()
             presenter.pause()
         }
+    }
+    
+    private func resetTimerLabel() {
+        playTimeInSeconds = playTime * 60
+        let seconds: Int = playTimeInSeconds % 60
+        let minutes: Int = (playTimeInSeconds / 60) % 60
+        let hour: Int = playTimeInSeconds / 3600
+        let aaa = String(format: "%02d:%02d:%02d", hour, minutes, seconds)
+        
+        timerLabel.text = aaa
     }
 }
