@@ -97,6 +97,9 @@ class MainVCPresenter: MainVCPresenterProtocol {
     }
 
     func timeFormatted(_ minutes: Int) -> String? {
+        if minutes == 1 {
+            return "∞"
+        }
         let totalSeconds = minutes * 60
         
         let seconds: Int = totalSeconds % 60

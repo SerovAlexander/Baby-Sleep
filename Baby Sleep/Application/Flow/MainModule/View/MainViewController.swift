@@ -493,8 +493,9 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
                     } else {
                         selectIndexPath = indexPath
                     }
-                    
+                    if playTime != 1 {
                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+                    }
                     presenter.natureSounds?[indexPath.row].selected = true
                     stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
                     stopPlayButton.alpha = 1
@@ -618,12 +619,16 @@ extension MainViewController {
     }
     
     private func resetTimerLabel() {
-        playTimeInSeconds = playTime * 60
-        let seconds: Int = playTimeInSeconds % 60
-        let minutes: Int = (playTimeInSeconds / 60) % 60
-        let hour: Int = playTimeInSeconds / 3600
-        let aaa = String(format: "%02d:%02d:%02d", hour, minutes, seconds)
-        
-        timerLabel.text = aaa
+        if playTime == 1 {
+            timerLabel.text = "∞"
+        } else {
+            playTimeInSeconds = playTime * 60
+            let seconds: Int = playTimeInSeconds % 60
+            let minutes: Int = (playTimeInSeconds / 60) % 60
+            let hour: Int = playTimeInSeconds / 3600
+            let aaa = String(format: "%02d:%02d:%02d", hour, minutes, seconds)
+            
+            timerLabel.text = aaa
+        }
     }
 }

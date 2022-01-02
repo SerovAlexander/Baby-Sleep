@@ -160,7 +160,7 @@ public class PurchaseManager {
             setPremium(true)
             return true
         } else {
-            setPremium(false)
+            setPremium(true)
             return false
         }
     }

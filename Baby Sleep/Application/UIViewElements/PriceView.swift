@@ -98,7 +98,6 @@ private extension PriceView {
     }
     
     func setupPriceLabel() {
-//        priceLabel.text = "9,99 $"
         priceLabel.textColor = .white
         priceLabel.font = UIFont(name: "MontserratAlternates-SemiBold", size: 22)
         priceLabel.adjustsFontSizeToFitWidth = true
