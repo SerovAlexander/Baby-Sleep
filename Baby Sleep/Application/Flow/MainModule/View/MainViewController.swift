@@ -395,7 +395,9 @@ class MainViewController: UIViewController {
     @objc private func playerPause() {
         if !presenter.isPlaying {
             presenter.playStopTogle(audio: presenter.lastPlaying?.audioUrl ?? "", name: presenter.lastPlaying?.titleEn ?? "", time: playTime, isSelected: false, volume: volumeSlider.value)
+            if playTime != 1 {
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+            }
             stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
         } else {
             presenter.pause()
@@ -517,14 +519,15 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
                 presenter.playStopTogle(audio: model.audioUrl, name: model.titleEn, time: playTime, isSelected: model.selected, volume: volumeSlider.value)
                 if model.selected == false {
                     if selectIndexPath != nil {
-                        presenter.noiseSounds?[selectIndexPath!.row].selected = false
                         presenter.natureSounds?[selectIndexPath!.row].selected = false
+                        presenter.noiseSounds?[selectIndexPath!.row].selected = false
                         selectIndexPath = indexPath
                     } else {
                         selectIndexPath = indexPath
                     }
-                    
+                    if playTime != 1 {
                     timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+                    }
                     presenter.noiseSounds?[indexPath.row].selected = true
                     stopPlayButton.setImage(UIImage(named: "Pause"), for: .normal)
                     stopPlayButton.alpha = 1
@@ -540,7 +543,6 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
                     presenter.lastPlaying = nil
                     resetTimerLabel()
                 }
-
             }
             HapticFeedback.add()
         }
@@ -576,6 +578,13 @@ extension MainViewController: TimerViewDelegate {
         if !isPaid {
             updateTimerLabelAfterTapped(playTime)
             timerButtonTapped()
+            if playTime != 1 {
+                timer?.invalidate()
+                timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+            } else {
+                timer?.invalidate()
+                resetTimerLabel()
+            }
         } else {
             if !PurchaseManager.shared.isUserPremium {
                 timerButtonTapped()
@@ -585,6 +594,13 @@ extension MainViewController: TimerViewDelegate {
             } else {
                 updateTimerLabelAfterTapped(playTime)
                 timerButtonTapped()
+                if playTime != 1 {
+                    timer?.invalidate()
+                    timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimerLabel), userInfo: nil, repeats: true)
+                } else {
+                    timer?.invalidate()
+                    resetTimerLabel()
+                }
             }
         }
     }
@@ -615,6 +631,8 @@ extension MainViewController {
         } else {
             timer?.invalidate()
             presenter.pause()
+            resetTimerLabel()
+            stopPlayButton.setImage(UIImage(named: "Play"), for: .normal)
         }
     }
     

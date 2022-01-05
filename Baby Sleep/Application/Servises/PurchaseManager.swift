@@ -39,13 +39,11 @@ public class PurchaseManager {
     public func purchase(id: String, success: @escaping () -> Void, failed: @escaping (Bool) -> Void) {
         guard let product = products.filter({ $0.productId == id}).first else {
             failed(false)
-//            AppMetricEvent.purchaceFailed(productID: id, isProductsEmpty: products.isEmpty, userCanceled: false, apphudError: "Product not found")
             return
         }
         Apphud.purchase(product) { [self] result in
             let canceled = (result.error as? SKError)?.code == .paymentCancelled
             if let error = result.error {
-//                AppMetricEvent.purchaceFailed(productID: id, isProductsEmpty: products.isEmpty, userCanceled: canceled, apphudError: error.localizedDescription)
                 failed(canceled)
             }
             if let purchase = result.nonRenewingPurchase, purchase.isActive() {
@@ -57,7 +55,6 @@ public class PurchaseManager {
             } else {
                 self.setPremium(false)
                 failed(canceled)
-//                AppMetricEvent.purchaceFailed(productID: id, isProductsEmpty: products.isEmpty, userCanceled: canceled, apphudError: "Another reason")
             }
         }
     }
@@ -160,7 +157,7 @@ public class PurchaseManager {
             setPremium(true)
             return true
         } else {
-            setPremium(true)
+            setPremium(false)
             return false
         }
     }
