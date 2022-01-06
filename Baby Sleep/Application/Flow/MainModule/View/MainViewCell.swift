@@ -64,7 +64,7 @@ class MainViewCell: UICollectionViewCell {
     }
 
     func configureWithFirebase(with model: SoundModel) {
-        nameLabel.text = model.titleRu
+        nameLabel.text = model.titleEn
         let ref = storageRef.child(model.imageUrl)
         image.sd_setImage(with: ref, placeholderImage: UIImage(named: model.titleEn))
         deleteHighlites()
@@ -79,14 +79,16 @@ class MainViewCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
         nameLabel.font = UIFont(name: "MontserratAlternates-Regular", size: 16.0)
         nameLabel.textColor = .white
+        nameLabel.numberOfLines = 2
+        nameLabel.textAlignment = .center
         nameLabel.snp.makeConstraints { make in
             if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
                 make.top.equalTo(image.snp.bottom).offset(10)
             } else {
                 make.top.equalTo(image.snp.bottom).offset(16)
             }
-            make.centerX.equalTo(image)
-            make.height.equalTo(20)
+            make.leading.equalTo(image.snp.leading).offset(-5)
+            make.trailing.equalTo(image.snp.trailing).offset(5)
         }
     }
 

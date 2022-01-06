@@ -151,7 +151,7 @@ class MainViewController: UIViewController {
     }
     
     private func configureNatureLabel() {
-        natureLabel.setTitle("Природа", for: .normal)
+        natureLabel.setTitle("Nature", for: .normal)
         natureLabel.titleLabel?.font = UIFont(name: "MontserratAlternates-Regular", size: 20.0)
         natureLabel.tintColor = .white
         natureLabel.addTarget(self, action: #selector(natureButtonAction), for: .touchUpInside)
@@ -184,7 +184,7 @@ class MainViewController: UIViewController {
     }
     
     private func configureNoiseLabel() {
-        noiseLable.setTitle("Шум", for: .normal)
+        noiseLable.setTitle("Noise", for: .normal)
         noiseLable.titleLabel?.font = UIFont(name: "MontserratAlternates-Regular", size: 20.0)
         noiseLable.tintColor = .white
         noiseLable.titleLabel?.alpha = 0.5
@@ -205,7 +205,7 @@ class MainViewController: UIViewController {
             }
             make.centerY.equalTo(natureLabel)
             make.height.equalTo(24)
-            make.width.equalTo(53)
+            make.width.equalTo(70)
         }
         noiseDot.snp.makeConstraints { make in
             make.height.width.equalTo(6)

@@ -37,7 +37,7 @@ class StartViewController: UIViewController {
 
     private func configureStartButton() {
         startButton.backgroundColor = UIColor.buttonColor
-        startButton.setTitle("Начать", for: .normal)
+        startButton.setTitle("Start", for: .normal)
         startButton.layer.cornerRadius = 32
         startButton.setTitleColor(.white, for: .normal)
         startButton.titleLabel?.font = UIFont(name: "MontserratAlternates-Black", size: 25.0)
