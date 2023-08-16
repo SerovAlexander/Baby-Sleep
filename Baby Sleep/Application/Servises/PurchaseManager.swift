@@ -41,19 +41,21 @@ public class PurchaseManager {
             failed(false)
             return
         }
-        Apphud.purchase(product) { [self] result in
+        
+        Apphud.purchase(product) { [weak self] result in
             let canceled = (result.error as? SKError)?.code == .paymentCancelled
             if let error = result.error {
                 failed(canceled)
+                return
             }
             if let purchase = result.nonRenewingPurchase, purchase.isActive() {
-                self.setPremium(true)
+                self?.setPremium(true)
                 success()
             } else if let subscription = result.subscription, subscription.isActive() {
-                self.setPremium(true)
+                self?.setPremium(true)
                 success()
             } else {
-                self.setPremium(false)
+                self?.setPremium(false)
                 failed(canceled)
             }
         }

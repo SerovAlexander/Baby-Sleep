@@ -12,4 +12,5 @@ enum Subscriptions: String, CaseIterable {
     case oneYear = "com.whysohot.vpn.one.year"
     case oneMonth = "com.whysohot.vpn.one.month"
     case oneWeek = "com.whysohot.vpn.one.week"
+    case lifeTime = "com.whysohot.vpn.lifetime"
 }
