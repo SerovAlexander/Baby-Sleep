@@ -52,14 +52,6 @@ class AudioPlayer: AudioPlayerProtocol {
     }
     
     func fadeVolumeAndPause() {
-        if player?.volume ?? 0.1 > 0.0 {
-            player?.volume = self.player!.volume - 0.05
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.fadeVolumeAndPause()
-            }
-        } else {
-            player?.pause()
-        }
+        player?.setVolume(<#T##volume: Float##Float#>, fadeDuration: <#T##TimeInterval#>)
     }
 }
