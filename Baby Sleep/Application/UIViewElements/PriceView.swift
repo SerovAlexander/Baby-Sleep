@@ -71,11 +71,13 @@ private extension PriceView {
     func setupConstraints() {
         priceLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(5)
         }
         
         periodLabel.snp.makeConstraints {
             $0.top.equalTo(priceLabel.snp.bottom).offset(10)
             $0.centerX.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(5).priority(.low)
         }
         
         self.snp.makeConstraints {
@@ -96,15 +98,16 @@ private extension PriceView {
     }
     
     func setupPriceLabel() {
-        priceLabel.text = "9,99 $"
         priceLabel.textColor = .white
-        priceLabel.font = UIFont(name: "MontserratAlternates-SemiBold", size: 28)
+        priceLabel.font = UIFont(name: "MontserratAlternates-SemiBold", size: 22)
+        priceLabel.adjustsFontSizeToFitWidth = true
+        priceLabel.minimumScaleFactor = 0.5
+        priceLabel.textAlignment = .center
     }
     
     func setupPeriodLabel() {
-        periodLabel.text = "В месяц"
         periodLabel.textColor = .white
-        periodLabel.font = UIFont(name: "MontserratAlternates-Regular", size: 20)
+        periodLabel.font = UIFont(name: "MontserratAlternates-Regular", size: 18)
     }
 }
 

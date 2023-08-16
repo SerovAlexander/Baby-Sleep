@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import Foundation
 import ApphudSDK
 import StoreKit
 import SparrowKit
@@ -16,6 +14,7 @@ import SparrowKit
 /// Сервис по управлению встроенными покупками, через него осуществляется оплата, восстановление подписки, получение инфорции о ценах, периоде, триалах и тд.
 public class PurchaseManager {
     public static let shared = PurchaseManager()
+    private let apphudKey = "app_vmW95WrHrABenX6ezHDp7MA59GSa61"
     private init() { }
     
     /// Продукты полученные из Apphud
@@ -40,13 +39,11 @@ public class PurchaseManager {
     public func purchase(id: String, success: @escaping () -> Void, failed: @escaping (Bool) -> Void) {
         guard let product = products.filter({ $0.productId == id}).first else {
             failed(false)
-//            AppMetricEvent.purchaceFailed(productID: id, isProductsEmpty: products.isEmpty, userCanceled: false, apphudError: "Product not found")
             return
         }
         Apphud.purchase(product) { [self] result in
             let canceled = (result.error as? SKError)?.code == .paymentCancelled
             if let error = result.error {
-//                AppMetricEvent.purchaceFailed(productID: id, isProductsEmpty: products.isEmpty, userCanceled: canceled, apphudError: error.localizedDescription)
                 failed(canceled)
             }
             if let purchase = result.nonRenewingPurchase, purchase.isActive() {
@@ -58,7 +55,6 @@ public class PurchaseManager {
             } else {
                 self.setPremium(false)
                 failed(canceled)
-//                AppMetricEvent.purchaceFailed(productID: id, isProductsEmpty: products.isEmpty, userCanceled: canceled, apphudError: "Another reason")
             }
         }
     }
@@ -93,8 +89,16 @@ public class PurchaseManager {
     /// - Parameter productWithID: id продукта
     public func priceFor(productWithID identifier: String) -> String {
         guard let product = products
-                .filter({ $0.productId == identifier}).first?.skProduct else { return "" }
+                .filter({ $0.productId == identifier}).first?.skProduct else {
+                    return ""
+                }
         return product.localizedPrice ?? ""
+    }
+    
+    public func titleFor(productWithID identifier: String) -> String {
+        guard let product = products
+                .filter({ $0.productId == identifier}).first else { return "" }
+        return product.name ?? ""
     }
     
     /// Получить  триальный период для подписки, если триального периода нет, то возвращается `nil`
@@ -139,7 +143,7 @@ public class PurchaseManager {
     
     // MARK: - Private Methods
     internal func start() {
-        Apphud.start(apiKey: "NetworkApp.shared.configuration.apphudKey")
+        Apphud.start(apiKey: apphudKey)
         validate()
         downloadPaywalls { self.paywalls = $0 }
     }
@@ -148,15 +152,12 @@ public class PurchaseManager {
     private func validate() -> Bool {
         if Apphud.hasActiveNonRenewingPurchase() {
             setPremium(true)
-//            Logger.log(.debug, logItem: "Have an active livetime purchase")
             return true
         } else if Apphud.hasActiveSubscription() {
             setPremium(true)
-//            Logger.log(.debug, logItem: "Have an active subscription")
             return true
         } else {
             setPremium(false)
-//            Logger.log(.debug, logItem: "No subscriptions or purchases")
             return false
         }
     }
@@ -169,12 +170,12 @@ public class PurchaseManager {
         var data: [String: ApphudPaywall] = [:]
         Apphud.getPaywalls { paywals, error in
             if let error = error {
-//                Logger.log(.error, logItem: error.localizedDescription)
             } else if let paywals = paywals {
+                print(paywals)
                 paywals.forEach { data[$0.identifier] = $0 }
+                print(data)
                 completion(data)
             } else {
-//                Logger.log(.debug, logItem: "No Paywalls")
             }
         }
     }
@@ -222,5 +223,13 @@ public extension SKProduct {
         formatter.locale = locale
         formatter.numberStyle = .currency
         return formatter
+    }
+}
+
+extension ApphudPurchaseResult {
+    var success: Bool {
+        subscription?.isActive() ?? false ||
+            nonRenewingPurchase?.isActive() ?? false ||
+            (Apphud.isSandbox() && transaction?.transactionState == .purchased)
     }
 }

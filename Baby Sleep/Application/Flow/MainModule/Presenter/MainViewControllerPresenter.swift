@@ -23,8 +23,10 @@ protocol MainVCPresenterProtocol {
     init(view: MainViewControllerProtocol, networkService: NetworkService, audioPlayer: AudioPlayerProtocol)
     var natureSounds: [SoundModel]? { get set }
     var noiseSounds: [SoundModel]? { get set }
+    var isPlaying: Bool { get set }
+    var lastPlaying: SoundModel? { get set }
     func getSound()
-    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool)
+    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool, volume: Float)
     func pause()
     func changeVolume(volume: Float)
     func timeFormatted(_ minutes: Int) -> String?
@@ -37,6 +39,8 @@ class MainVCPresenter: MainVCPresenterProtocol {
     private let audioPlayer: AudioPlayerProtocol
     var natureSounds: [SoundModel]?
     var noiseSounds: [SoundModel]?
+    var isPlaying = false
+    var lastPlaying: SoundModel?
     let formatter = DateComponentsFormatter()
     private var timer: Timer?
 
@@ -74,16 +78,18 @@ class MainVCPresenter: MainVCPresenterProtocol {
         }
     }
 
-    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool) {
+    func playStopTogle(audio: String, name: String, time: Int, isSelected: Bool, volume: Float) {
         if isSelected {
-            audioPlayer.pause()
+            pause()
         } else {
-            audioPlayer.play(audio: audio, name: name)
+            audioPlayer.play(audio: audio, name: name, volume: volume)
+            isPlaying = true
         }
     }
 
     func pause() {
-        audioPlayer.pause()
+        audioPlayer.fadeVolumeAndPause()
+        isPlaying = false
     }
 
     func changeVolume(volume: Float) {
@@ -91,11 +97,15 @@ class MainVCPresenter: MainVCPresenterProtocol {
     }
 
     func timeFormatted(_ minutes: Int) -> String? {
+        if minutes == 1 {
+            return "∞"
+        }
         let totalSeconds = minutes * 60
         
         let seconds: Int = totalSeconds % 60
         let minutes: Int = (totalSeconds / 60) % 60
-        return String(format: "%02d:%02d", minutes, seconds)
+        let hour: Int = totalSeconds / 3600
+        return String(format: "%02d:%02d:%02d", hour, minutes, seconds)
     }
 
     private struct Inner {

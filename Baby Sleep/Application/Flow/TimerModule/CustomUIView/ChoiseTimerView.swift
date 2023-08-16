@@ -12,26 +12,26 @@ import SnapKit
 import UIKit
 
 // ----------------------------------------------------------------------------
-protocol timerViewDelegate: AnyObject {
+protocol TimerViewDelegate: AnyObject {
     func timerButtonTapped()
-    func timeButtonTapped(playTime: Int)
+    func timeButtonTapped(playTime: Int, isPaid: Bool)
 }
 
 
 class ChoiseTimerView: UIView {
     
     private let conteinerView = UIView()
-    private let fifteenView = TimerView(time: "15m", timer: 15)
-    private let thirtyView = TimerView(time: "30m", timer: 30)
-    private let fortyfiveView = TimerView(time: "45m", timer: 45)
-    private let hourView = TimerView(time: "1h", timer: 60)
-    private let twoHourView = TimerView(time: "2h", timer: 120)
-    private let infinityView = TimerView(time: "∞", timer: 1)
+    private let fifteenView = TimerView(time: "15m", timer: 15, isPaid: false)
+    private let thirtyView = TimerView(time: "30m", timer: 30, isPaid: false)
+    private let fortyfiveView = TimerView(time: "45m", timer: 45, isPaid: true)
+    private let hourView = TimerView(time: "1h", timer: 60, isPaid: true)
+    private let twoHourView = TimerView(time: "2h", timer: 120, isPaid: true)
+    private let infinityView = TimerView(time: "∞", timer: 1, isPaid: true)
     private let rightStackView = UIStackView()
     private let leftStackView = UIStackView()
     private let timerButton = UIButton()
     
-    weak var delegate: timerViewDelegate?
+    weak var delegate: TimerViewDelegate?
     private var choseTime = 15
     
     override init(frame: CGRect) {
@@ -54,13 +54,13 @@ class ChoiseTimerView: UIView {
         conteinerView.addSubview(leftStackView)
         conteinerView.addSubview(timerButton)
         
-        rightStackView.addArrangedSubview(thirtyView)
-        rightStackView.addArrangedSubview(hourView)
-        rightStackView.addArrangedSubview(infinityView)
+        rightStackView.addArrangedSubview(fifteenView)
+        rightStackView.addArrangedSubview(fortyfiveView)
+        rightStackView.addArrangedSubview(twoHourView)
         
-        leftStackView.addArrangedSubview(fifteenView)
-        leftStackView.addArrangedSubview(fortyfiveView)
-        leftStackView.addArrangedSubview(twoHourView)
+        leftStackView.addArrangedSubview(thirtyView)
+        leftStackView.addArrangedSubview(hourView)
+        leftStackView.addArrangedSubview(infinityView)
     }
     
     private func configureConteinerView() {
@@ -78,10 +78,6 @@ class ChoiseTimerView: UIView {
         rightStackView.alignment = .center
         rightStackView.spacing = 24
         rightStackView.distribution = .equalSpacing
-        
-        thirtyView.backgroundColor = .white
-        hourView.backgroundColor = .white
-        infinityView.backgroundColor = .white
         
         thirtyView.layer.cornerRadius = 15
         hourView.layer.cornerRadius = 15
@@ -105,9 +101,6 @@ class ChoiseTimerView: UIView {
         leftStackView.spacing = 10
         leftStackView.distribution = .equalCentering
         
-        fifteenView.backgroundColor = .white
-        fortyfiveView.backgroundColor = .white
-        twoHourView.backgroundColor = .white
         
         fifteenView.layer.cornerRadius = 15
         fortyfiveView.layer.cornerRadius = 15
@@ -168,24 +161,7 @@ class ChoiseTimerView: UIView {
         delegate?.timerButtonTapped()
     }
     
-    @objc private func timeButtonTapped(sender: UIButton) {
-        var playTime = 15
-        switch sender.tag {
-        case 1:
-            playTime = 15
-        case 2:
-            playTime = 30
-        case 3:
-            playTime = 45
-        case 4:
-            playTime = 60
-        case 5:
-            playTime = 120
-        case 6:
-            playTime = 1
-        default:
-            playTime = 15
-        }
-        delegate?.timeButtonTapped(playTime: playTime)
+    @objc private func timeButtonTapped(sender: TimerView) {
+        delegate?.timeButtonTapped(playTime: sender.time, isPaid: sender.isPaid)
     }
 }

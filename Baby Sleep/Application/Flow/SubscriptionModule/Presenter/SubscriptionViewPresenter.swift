@@ -10,7 +10,7 @@ import Foundation
 
 protocol SubscriptionViewPresenterProtocol {
     init(view: SubscriptionViewControllerProtocol, purchaseManager: PurchaseManager)
-    var currentSubscriptionId: String? { get set }
+    var currentSubscriptionId: String { get set }
     var yearPrice: String? { get set }
     var mounthPrice: String? { get set }
     var weekPrice: String? { get set }
@@ -38,19 +38,17 @@ class SubscriptionViewPresenter: SubscriptionViewPresenterProtocol {
     var mounthPrice: String?
     var weekPrice: String?
     weak var view: SubscriptionViewControllerProtocol?
-    var currentSubscriptionId: String?
+    var currentSubscriptionId: String = Subscriptions.oneYear.rawValue
     private let purchaseManager: PurchaseManager
     
     required init (view: SubscriptionViewControllerProtocol, purchaseManager: PurchaseManager) {
         self.view = view
         self.purchaseManager = purchaseManager
-        getPrices()
         addObserver()
     }
     
     func buyTapped() {
         view?.isPurchasing(true)
-        guard let currentSubscriptionId = currentSubscriptionId else { return }
         purchaseManager.purchase(id: currentSubscriptionId) {
             self.view?.isPurchasing(false)
             self.view?.purchaseSuccess()
@@ -83,11 +81,12 @@ class SubscriptionViewPresenter: SubscriptionViewPresenterProtocol {
         yearPrice = purchaseManager.priceFor(productWithID: Subscriptions.oneYear.rawValue)
         mounthPrice = purchaseManager.priceFor(productWithID: Subscriptions.oneMonth.rawValue)
         weekPrice = purchaseManager.priceFor(productWithID: Subscriptions.oneWeek.rawValue)
-//        view?.updatePrice()
+        view?.updatePrice()
     }
     
     func addObserver() {
-        NotificationService.observe(event: .didFetchProducts) {
+        NotificationService.observe(event: .didFetchProducts) { [weak self] in
+            guard let self = self else { return }
             self.getPrices()
         }
     }
