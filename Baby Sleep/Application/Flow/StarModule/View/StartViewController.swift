@@ -35,7 +35,7 @@ class StartViewController: UIViewController {
         backgroundView.contentMode = .scaleAspectFill
         let animation = Animation.named("background")
         backgroundView.animation = animation
-        backgroundView.loopMode = .repeat(2)
+        backgroundView.loopMode = .repeat(1)
         backgroundView.play { [weak self] _ in
             self?.startButtonAction()
         }
