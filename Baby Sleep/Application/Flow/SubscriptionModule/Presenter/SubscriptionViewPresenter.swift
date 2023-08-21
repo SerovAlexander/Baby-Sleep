@@ -10,7 +10,7 @@ import Foundation
 
 protocol SubscriptionViewPresenterProtocol {
     init(view: SubscriptionViewControllerProtocol, purchaseManager: PurchaseManager)
-    var currentSubscriptionId: String { get set }
+    var currentSubscriptionId: String? { get set }
     var yearPrice: String? { get set }
     var mounthPrice: String? { get set }
     var weekPrice: String? { get set }
@@ -37,8 +37,9 @@ class SubscriptionViewPresenter: SubscriptionViewPresenterProtocol {
     var yearPrice: String?
     var mounthPrice: String?
     var weekPrice: String?
+    var lifeTime: String?
     weak var view: SubscriptionViewControllerProtocol?
-    var currentSubscriptionId: String = Subscriptions.oneYear.rawValue
+    var currentSubscriptionId: String?
     private let purchaseManager: PurchaseManager
     
     required init (view: SubscriptionViewControllerProtocol, purchaseManager: PurchaseManager) {
@@ -48,16 +49,17 @@ class SubscriptionViewPresenter: SubscriptionViewPresenterProtocol {
     }
     
     func buyTapped() {
+        guard let currentSubscriptionId = self.currentSubscriptionId else { return }
+        
         view?.isPurchasing(true)
         purchaseManager.purchase(id: currentSubscriptionId) {
             self.view?.isPurchasing(false)
             self.view?.purchaseSuccess()
         } failed: { isCanceled in
+            self.view?.isPurchasing(false)
             if isCanceled {
-                self.view?.isPurchasing(false)
                 self.view?.userCancaled()
             } else {
-                self.view?.isPurchasing(false)
                 self.view?.purchaseError()
             }
         }

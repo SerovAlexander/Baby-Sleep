@@ -14,6 +14,7 @@ import UIKit
 class PriceView: UIButton {
     
     open override var isSelected: Bool { didSet { isSelected == true ? selectedState() : deselectedState() } }
+    
     private(set) var subscriptionId: String = ""
     
     private lazy var priceLabel = UILabel()
@@ -31,11 +32,13 @@ class PriceView: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 
 // ----------------------------------------------------------------------------
 
 extension PriceView {
+    
     public func setupPrice(_ price: String) {
         priceLabel.text = price
     }
@@ -47,6 +50,7 @@ extension PriceView {
     public func setupId(_ id: Subscriptions)  {
         subscriptionId = id.rawValue
     }
+    
 }
 
 // ----------------------------------------------------------------------------
@@ -109,5 +113,5 @@ private extension PriceView {
         periodLabel.textColor = .white
         periodLabel.font = UIFont(name: "MontserratAlternates-Regular", size: 18)
     }
+    
 }
-

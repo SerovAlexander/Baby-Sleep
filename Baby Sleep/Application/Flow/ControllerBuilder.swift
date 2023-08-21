@@ -30,7 +30,7 @@ class ControllerBuilder: BuilderModulProtocol {
     }
     
     static func createSubscriptionController() -> UIViewController {
-        let subscriptionController = SubscriptionViewController()
+        let subscriptionController = LifeTimeSubscriptionsViewController()
         let purchaseManager = PurchaseManager.shared
         let presenter = SubscriptionViewPresenter(view: subscriptionController, purchaseManager: purchaseManager)
         

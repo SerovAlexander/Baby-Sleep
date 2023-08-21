@@ -46,7 +46,7 @@ class SubscriptionViewController: UIViewController {
 
 private extension SubscriptionViewController {
     func configureController() {
-        view.backgroundColor = UIColor(red: 39.0 / 255.0, green: 37.0 / 255.0, blue: 94.0 / 255.0, alpha: 1.0)
+        view.backgroundColor = .hexColor("#27255e")
     }
 
     func addViews() {
@@ -235,7 +235,7 @@ private extension SubscriptionViewController {
 
 extension SubscriptionViewController: SubscriptionViewControllerProtocol {
     func isPurchasing(_ isPurchasing: Bool) {
-        print("isPurchasing")
+        print("isPurchasing \(isPurchasing)")
         continueButton.isLoading = true
         restoreButton.isEnabled = false
         weekPriceView.isUserInteractionEnabled = false

@@ -11,7 +11,9 @@ import UIKit
 open class BasicButton: UIButton {
     
     open override var isHighlighted: Bool { didSet { isHighlighted == true ? touchDown() : touchUp() } }
+    
     private lazy var indicatorView = UIActivityIndicatorView()
+    
     public var isLoading = false {
         didSet {
             loading()
