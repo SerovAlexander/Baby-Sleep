@@ -50,8 +50,9 @@ class SubscriptionViewPresenter: SubscriptionViewPresenterProtocol {
     
     func buyTapped() {
         guard let currentSubscriptionId = self.currentSubscriptionId else { return }
-        
+
         view?.isPurchasing(true)
+
         purchaseManager.purchase(id: currentSubscriptionId) {
             self.view?.isPurchasing(false)
             self.view?.purchaseSuccess()
