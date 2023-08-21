@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SPAlert
 
 class LifeTimeSubscriptionsViewController: CommonSubscriptionViewController {
     
@@ -41,7 +42,9 @@ extension LifeTimeSubscriptionsViewController: SubscriptionViewControllerProtoco
     }
 
     func purchaseSuccess() {
-        print("purchaseSuccess")
+        SPAlert.present(title: "Success", preset: .done, haptic: .success) {
+            self.dismiss(animated: true)
+        }
     }
 
     func purchaseError() {

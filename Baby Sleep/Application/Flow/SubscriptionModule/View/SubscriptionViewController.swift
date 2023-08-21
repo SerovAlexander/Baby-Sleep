@@ -6,8 +6,9 @@
 //  Copyright © 2021 Aleksandr Serov. All rights reserved.
 // ----------------------------------------------------------------------------
 
-import SnapKit
 import UIKit
+import SnapKit
+import SPAlert
 
 // ----------------------------------------------------------------------------
 
@@ -37,6 +38,7 @@ class SubscriptionViewController: UIViewController {
         weekPriceView.isSelected = false
         mounthPriceView.isSelected = false
         backGroundView.isUserInteractionEnabled = true
+        presenter.currentSubscriptionId = Subscriptions.oneYear.rawValue
         getPrices()
         addObserver()
     }
@@ -258,32 +260,47 @@ extension SubscriptionViewController: SubscriptionViewControllerProtocol {
     }
 
     func purchaseSuccess() {
-        print("purchaseSuccess")
+        self.successHandler()
     }
 
     func purchaseError() {
-        print("purchaseError")
-        continueButton.isLoading = false
-        restoreButton.isEnabled = true
-        weekPriceView.isUserInteractionEnabled = true
-        mounthPriceView.isUserInteractionEnabled = true
-        yearPriceView.isUserInteractionEnabled = true
+        self.errorHandler()
     }
 
     func restoreSuccess() {
-        print("restoreSuccess")
+        self.successHandler()
     }
 
     func restoreError() {
-        print("restoreError")
-        restoreButton.isLoading = false
-        continueButton.isEnabled = true
-        weekPriceView.isUserInteractionEnabled = true
-        mounthPriceView.isUserInteractionEnabled = true
-        yearPriceView.isUserInteractionEnabled = true
+        self.errorHandler()
     }
 
     func userCancaled() {
-        print("userCancaled")
+        SPAlert.present(title: "Canceled", preset: .error, haptic: .error) { [weak self] in
+            guard let self = self else { return }
+            self.continueButton.isLoading = false
+            self.restoreButton.isEnabled = true
+            self.weekPriceView.isUserInteractionEnabled = true
+            self.mounthPriceView.isUserInteractionEnabled = true
+            self.yearPriceView.isUserInteractionEnabled = true
+        }
+    }
+    
+    func successHandler() {
+        SPAlert.present(title: "Success", preset: .done, haptic: .success) { [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true)
+        }
+    }
+    
+    func errorHandler() {
+        SPAlert.present(title: "Error", preset: .error, haptic: .error) { [weak self] in
+            guard let self = self else { return }
+            self.continueButton.isLoading = false
+            self.restoreButton.isEnabled = true
+            self.weekPriceView.isUserInteractionEnabled = true
+            self.mounthPriceView.isUserInteractionEnabled = true
+            self.yearPriceView.isUserInteractionEnabled = true
+        }
     }
 }
