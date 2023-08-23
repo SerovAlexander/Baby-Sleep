@@ -29,7 +29,7 @@ class ChoiseTimerView: UIView {
     private let infinityView = TimerView(time: "∞", timer: 1, isPaid: true)
     private let rightStackView = UIStackView()
     private let leftStackView = UIStackView()
-    private let timerButton = UIButton()
+    private let timerButton = UIButton(type: .system)
     
     weak var delegate: TimerViewDelegate?
     private var choseTime = 15
@@ -118,8 +118,9 @@ class ChoiseTimerView: UIView {
     }
     
     private func configureTimerButton() {
-        guard let timer = UIImage(named: "timer") else { return }
+        guard let timer = UIImage(systemName: "timer") else { return }
         
+        timerButton.tintColor = .white
         timerButton.setImage(timer, for: .normal)
         timerButton.contentMode = .scaleAspectFit
         timerButton.addTarget(self, action: #selector(timerButtonTapped), for: .touchUpInside)

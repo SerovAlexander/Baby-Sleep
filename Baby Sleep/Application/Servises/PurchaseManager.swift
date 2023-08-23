@@ -9,7 +9,7 @@
 import Foundation
 import ApphudSDK
 import StoreKit
-import SparrowKit
+import SwiftBoost
 
 /// Сервис по управлению встроенными покупками, через него осуществляется оплата, восстановление подписки, получение инфорции о ценах, периоде, триалах и тд.
 public class PurchaseManager {

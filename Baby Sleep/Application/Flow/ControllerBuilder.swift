@@ -38,4 +38,10 @@ class ControllerBuilder: BuilderModulProtocol {
         
         return subscriptionController
     }
+    
+    static func createSettingsController() -> UIViewController {
+        let vc = SettingsViewController()
+        
+        return vc
+    }
 }

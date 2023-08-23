@@ -62,6 +62,9 @@
 		0FDC47362731C6BB004FCBCE /* TimerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDC47352731C6BB004FCBCE /* TimerViewPresenter.swift */; };
 		BE65FC9F2A8D5F21009E3C5D /* LifeTimeSubscriptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65FC9E2A8D5F21009E3C5D /* LifeTimeSubscriptionsViewController.swift */; };
 		BE65FCA12A8D60A3009E3C5D /* CommonSubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65FCA02A8D60A3009E3C5D /* CommonSubscriptionViewController.swift */; };
+		BE65FCA62A960E12009E3C5D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65FCA52A960E12009E3C5D /* SettingsViewController.swift */; };
+		BE65FCA82A962F2F009E3C5D /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65FCA72A962F2F009E3C5D /* TableViewCell.swift */; };
+		BE65FCAA2A962F4C009E3C5D /* SettingsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE65FCA92A962F4C009E3C5D /* SettingsImageView.swift */; };
 		D119D954C87A003F2A472291 /* Pods_Baby_Sleep.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +128,9 @@
 		97DEA186E8F25836A30D84EB /* Pods_Baby_Sleep.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Baby_Sleep.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE65FC9E2A8D5F21009E3C5D /* LifeTimeSubscriptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeTimeSubscriptionsViewController.swift; sourceTree = "<group>"; };
 		BE65FCA02A8D60A3009E3C5D /* CommonSubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSubscriptionViewController.swift; sourceTree = "<group>"; };
+		BE65FCA52A960E12009E3C5D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		BE65FCA72A962F2F009E3C5D /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		BE65FCA92A962F4C009E3C5D /* SettingsImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsImageView.swift; sourceTree = "<group>"; };
 		CF3180EE80ACA435B37E96FD /* Pods-Baby Sleep.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baby Sleep.release.xcconfig"; path = "Target Support Files/Pods-Baby Sleep/Pods-Baby Sleep.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -300,6 +306,7 @@
 				04F59E67257581C000A35094 /* StarModule */,
 				04F59E6A2575821F00A35094 /* MainModule */,
 				04E9A6DB25DAFF600090C4D2 /* TimerModule */,
+				BE65FCA22A960C8D009E3C5D /* SettingsModule */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -419,6 +426,16 @@
 				04E9A6DD25DAFF9D0090C4D2 /* TimerViewController.swift */,
 			);
 			path = TimerView;
+			sourceTree = "<group>";
+		};
+		BE65FCA22A960C8D009E3C5D /* SettingsModule */ = {
+			isa = PBXGroup;
+			children = (
+				BE65FCA52A960E12009E3C5D /* SettingsViewController.swift */,
+				BE65FCA72A962F2F009E3C5D /* TableViewCell.swift */,
+				BE65FCA92A962F4C009E3C5D /* SettingsImageView.swift */,
+			);
+			path = SettingsModule;
 			sourceTree = "<group>";
 		};
 		C34B164CD64C171AC044B909 /* Frameworks */ = {
@@ -576,9 +593,11 @@
 			files = (
 				BE65FCA12A8D60A3009E3C5D /* CommonSubscriptionViewController.swift in Sources */,
 				0F41F106272C46CB00C5BACE /* SubscriptionViewPresenter.swift in Sources */,
+				BE65FCA62A960E12009E3C5D /* SettingsViewController.swift in Sources */,
 				04E84EE1258A204500A7CECA /* TimerView.swift in Sources */,
 				0FDC47362731C6BB004FCBCE /* TimerViewPresenter.swift in Sources */,
 				0F41F105272C46CB00C5BACE /* SubscriptionsID's.swift in Sources */,
+				BE65FCA82A962F2F009E3C5D /* TableViewCell.swift in Sources */,
 				04F5668424B88CA6002FB386 /* StartViewController.swift in Sources */,
 				045C94F22576C19300A86876 /* HapticFeedback.swift in Sources */,
 				0F41F109272C46E700C5BACE /* DefaultsService.swift in Sources */,
@@ -593,6 +612,7 @@
 				04E84EC7258A1EA100A7CECA /* ChoiseTimerView.swift in Sources */,
 				0F41F10D272C46F500C5BACE /* PurchaseManager.swift in Sources */,
 				0F41F10B272C46EF00C5BACE /* NotificationService.swift in Sources */,
+				BE65FCAA2A962F4C009E3C5D /* SettingsImageView.swift in Sources */,
 				0F3CBA5E2620896D006BF1E8 /* UIColorExtensions.swift in Sources */,
 				04F566A024BB0FD6002FB386 /* MainViewController.swift in Sources */,
 				04F5668224B88CA6002FB386 /* SceneDelegate.swift in Sources */,
@@ -743,9 +763,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3U8BAPP493;
+				DEVELOPMENT_TEAM = 928NUL5HHN;
 				INFOPLIST_FILE = "Baby Sleep/Environments/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -765,9 +786,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3U8BAPP493;
+				DEVELOPMENT_TEAM = 928NUL5HHN;
 				INFOPLIST_FILE = "Baby Sleep/Environments/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

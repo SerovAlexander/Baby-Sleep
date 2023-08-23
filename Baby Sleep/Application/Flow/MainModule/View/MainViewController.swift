@@ -44,10 +44,11 @@ class MainViewController: UIViewController {
     private let volumeSlider = UISlider()
     private let loudVolumeImage = UIImageView()
     private let quiteVolumeImage = UIImageView()
-    private let timerButton = UIButton()
+    private let timerButton = UIButton(type: .system)
     private lazy var timerCustomView = ChoiseTimerView()
     private let visualEffectView = UIVisualEffectView()
     private let timerLabel = UILabel()
+    private let settingsButton = UIButton(type: .system)
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -78,6 +79,7 @@ class MainViewController: UIViewController {
         configureNoiseLabel()
         configureTimeLabel()
         convigureVisualEffectView()
+        configureSettingsButton()
     }
     
     //MARK: - Configure UI
@@ -271,9 +273,10 @@ class MainViewController: UIViewController {
     
     private func configureTimerButton() {
         self.view.addSubview(timerButton)
-        guard let timer = UIImage(named: "timer") else { return }
-        
+        guard let timer = UIImage(systemName: "timer") else { return }
+
         timerButton.setImage(timer, for: .normal)
+        timerButton.tintColor = .white
         timerButton.contentMode = .scaleAspectFit
         timerButton.addTarget(self, action: #selector(showTimer), for: .touchUpInside)
         
@@ -372,6 +375,22 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func configureSettingsButton() {
+        view.addSubview(settingsButton)
+        settingsButton.do {
+            $0.setImage(UIImage(systemName: "gearshape"))
+            $0.tintColor = .white
+            $0.contentMode = .scaleAspectFit
+            $0.addTarget(self, action: #selector(settingsButtomTapped), for: .touchUpInside)
+        }
+        
+        settingsButton.snp.makeConstraints {
+            $0.centerY.equalTo(self.stopPlayButton.snp.centerY)
+            $0.trailing.equalToSuperview().inset(30)
+            $0.width.height.equalTo(28)
+        }
+    }
+    
     //MARK:- Private Methods
     
     @objc private func natureButtonAction() {
@@ -418,6 +437,12 @@ class MainViewController: UIViewController {
     
     @objc private func closeTimerView(sender: UIView) {
         timerButtonTapped()
+    }
+    
+    @objc private func settingsButtomTapped() {
+        let vc = ControllerBuilder.createSettingsController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, completion: nil)
     }
 }
 
@@ -589,7 +614,7 @@ extension MainViewController: TimerViewDelegate {
             if !PurchaseManager.shared.isUserPremium {
                 timerButtonTapped()
                 let vc = ControllerBuilder.createSubscriptionController()
-                
+                vc.modalPresentationStyle = .fullScreen
                 self.present(vc, completion: nil)
             } else {
                 updateTimerLabelAfterTapped(playTime)

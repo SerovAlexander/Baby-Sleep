@@ -120,7 +120,7 @@ PODS:
   - SDWebImage/Core (5.12.1)
   - SnapKit (5.0.1)
   - SPAlert (4.2.0)
-  - SparrowKit (3.3.9)
+  - SwiftBoost (4.0.3)
 
 DEPENDENCIES:
   - ApphudSDK
@@ -131,7 +131,7 @@ DEPENDENCIES:
   - lottie-ios
   - SnapKit
   - SPAlert
-  - SparrowKit
+  - SwiftBoost
 
 SPEC REPOS:
   trunk:
@@ -158,7 +158,7 @@ SPEC REPOS:
     - SDWebImage
     - SnapKit
     - SPAlert
-    - SparrowKit
+    - SwiftBoost
 
 SPEC CHECKSUMS:
   ApphudSDK: 6633d84ca17c0a61d00f9ac7c280179ac258cd8f
@@ -184,8 +184,8 @@ SPEC CHECKSUMS:
   SDWebImage: 4dc3e42d9ec0c1028b960a33ac6b637bb432207b
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SPAlert: 735da1f16a887e294719217572ce1f936d8c8782
-  SparrowKit: 8e54a97089a016f87e0895df61d89a428ca94b51
+  SwiftBoost: e2f5e81e7ee1ba44714d3affff5522bacd93eef2
 
-PODFILE CHECKSUM: 9f34cab96d5f6f908261f3700e74cb981522a5b9
+PODFILE CHECKSUM: 880a0272825953e41204ba5961d21b17cda33e60
 
 COCOAPODS: 1.11.3

@@ -3032,11 +3032,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-## SparrowKit
+## SwiftBoost
 
 MIT License
 
-Copyright © 2020 Ivan Vorobei
+Copyright (c) 2022 Sparrow Code
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
